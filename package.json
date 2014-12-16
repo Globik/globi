@@ -4,21 +4,12 @@
     
   "version": "0.0.1",
   
-  "description": "Globibot",
+  "description": "globibot",
   "main": "index.js",  
   "scripts": {
  "start": " node index.js"
-,"preload":"i'm about load"},
+},
 
   "engines": {"node":"0.10.x"}
-,
-repository": {
-    "type": "git",
-    "url": "https://github.com/Globik/globibot"
-  },
-  "keywords": [
-    "node",
-    "heroku",
-    "express"
-  ]
+
 }
