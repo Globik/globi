@@ -32,7 +32,7 @@ app.get('/', function(req, res) {
 var router = express.Router();
 
 ***/
-var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+//var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
 ***/
@@ -57,6 +57,7 @@ console.log(result);});
 ***/
 
 app.get('/paramorig',function(req,res){
+/***
 db.collection('tasks').find().toArray(function(err,result){
 if(err)throw err;
 
@@ -66,9 +67,10 @@ var task=result.map(function(tw){return tw.task;});
 data.task=task;
 var cb=JSON.stringify(data);
 console.log(cb);
-console.log(result);
-res.send(cb);
-});
+console.log(result);});
+***/
+res.send("OK");
+
 });
 
 
