@@ -1,0 +1,52 @@
+﻿<html>
+<meta charset="UTF-8">
+<body>
+<h1>eine Probe</h1>
+<p><%=title %></p>
+<h2>Loop</h2>
+<ul>
+<% drinks.forEach(function(drink){ %>
+<li><%=drink.name %> - <%=drink.drunk %></li><% }); %>
+</ul>
+<span id='out'></span></br>
+<span id='out2'></span>
+<script>
+out.innerHTML="OK";
+</script>
+
+<button id="btn">xhr-Call to db</button>
+<script>
+btn.addEventListener('click',fuck,false);
+function fuck(e){
+var xhr=new XMLHttpRequest();
+xhr.open('GET', '/paramorig', true);
+//xhr.responseType='text';
+xhr.onload=function(e){
+if(this.status ==200){
+//alert(this.response);
+var data=JSON.parse(this.response);
+out.innerHTML="<b>My tasks :</b> "+data.task[1];
+}};
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
+
+
+xhr.send();
+}
+
+var ab={};
+ab.name='fu';
+var gu=JSON.stringify(ab);
+var su=JSON.parse(gu)
+out2.innerHTML=su.name;
+function masafuck(e){
+
+if(this.status == 200){
+var data=JSON.parse(this.response);
+//alert(this.response);
+out.innerHTML=this.response;
+}
+}
+
+</script>
+</body>
+</html>
