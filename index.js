@@ -6,7 +6,7 @@ var favicon=require('serve-favicon');
 var logger=require('morgan');
 var cooki=require('cookie-parser');
 var bodyparser=require('body-parser');
- //var methodover=require('method-override');
+
 var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
