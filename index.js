@@ -32,7 +32,10 @@ app.get('/', function(req, res) {
 var router = express.Router();
 
 ***/
-var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
+var db=require('mongoskin').db(process.env.MONGOHQ_URL);
+
+/***("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
+***/
 app.get('/', function(req, res) {
 var drinks=[
 {name:'Bloody Mary',drunk:3},
