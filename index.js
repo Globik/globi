@@ -60,7 +60,7 @@ console.log(result);});
 ***/
 
 app.get('/paramorig',function(req,res){
-/***
+
 db.collection('tasks').find().toArray(function(err,result){
 if(err)throw err;
 
@@ -70,10 +70,10 @@ var task=result.map(function(tw){return tw.task;});
 data.task=task;
 var cb=JSON.stringify(data);
 console.log(cb);
-console.log(result);});
-***/
-res.send("OK");
+console.log(result);
 
+res.send(cb);
+});
 });
 
 
