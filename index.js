@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.static(__dirname + '/public'));
 ***/
-//app.use(bodyparser());
+// app.use(bodyparser());
 //app.use(methodover());
  //app.use(express.router());
 /***
@@ -34,6 +34,7 @@ app.get('/', function(req, res) {
 //var router = express.Router();
 
 ***/
+//var db=require('mongoskin').db("mongodb://localhost:27017/todo");
 var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
@@ -44,35 +45,34 @@ var drinks=[
 {name:'Alik',drunk:5},
 {name:'Dima',drunk:10}
 ];
-
-  res.render('index', { drinks:drinks, title: 'Express' });
-});
-/***
 db.collection('tasks').find().toArray(function(err,result){
 if(err)throw err;
-var data={};
 
- var cnn=result.map(function(tw){return tw.task;});
-data.name=cnn;
-var cb=JSON.stringify(data);
-console.log(cb);
-console.log(result);});
-***/
+  res.render('index', { drinks:drinks, title: 'Express',resul:result});
+});});
+
 
 app.get('/paramorig',function(req,res){
 
 db.collection('tasks').find().toArray(function(err,result){
 if(err)throw err;
+/***
+task=name,_id,done=completed
 
+***/
 
 var data={};
 var task=result.map(function(tw){return tw.task;});
+var completed=result.map(function(tw){return tw.done;});
+var _id=result.map(function(tw){return tw._id;});
 data.task=task;
-var cb=JSON.stringify(data);
-console.log(cb);
-console.log(result);
+data.completed=completed
+data._id=_id;
+//var cb=JSON.stringify(data);
+//console.log(cb);
+//console.log(result);
 
-res.send(cb);
+res.send(JSON.stringify(data));
 });
 });
 
