@@ -43,10 +43,10 @@ document.getElementById('out').innerHTML="";
 function gotodb(e){
 var dov=document.getElementById('no');
 
-var b="<% resul.forEach(function(d){ %><li><%=d.name %></li><% });%>";
+var b="<% resul.forEach(function(d){ %><li><%=d.task %></li><% });%>";
 
 var ul=document.createElement('ul');
-    ul.innerHTML="mama <%=resul[1].name %>"+b;
+    ul.innerHTML="mama <%=resul[1].task %>"+b;
     dov.appendChild(ul);
 
     e.onclick=null;

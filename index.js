@@ -37,7 +37,8 @@ app.get('/', function(req, res) {
 //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
 var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
-/***("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
+/***
+var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
 ***/
 app.get('/', function(req, res) {
 var drinks=[
