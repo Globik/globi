@@ -17,7 +17,39 @@ cursor:pointer;
   padding: 5;
   box-sizing: border-box;
 }
-</style>
+
+body{font-size:16px;}
+table#myt caption {
+font-size:2rem;
+color:#444;
+}
+table#myt{
+border-collapse:collapse;
+font-family:Agenda-Light; font-weight:100;
+background:#333;color:#fff;
+text-rendering:optimizeLegibility;
+border-radius:8px;
+}
+table#myt thead th{ font-weight:600;}
+table#myt thead th,table#myt tbody td{
+padding: .8rem;font-size:1.4rem;}
+table#myt tbody td{
+padding:.8rem;font-size:1.4rem;
+color:#444;background:#eee;
+}
+table#myt tbody tr:not(:last-child){
+border-top:1px solid #ddd;
+border-bottom:1px solid #ddd;
+}
+@media screen and (max-width:600px){
+table#myt thead{display:none;}
+table#myt tbody td{display:block;padding:.6rem;}
+table#myt tbody tr td:first-child{background:#333;color:#fff;}
+table#myt tbody td:before{
+content:attr(data-th);font-weight:bold;
+display:inline-block;width:6rem;
+}
+}</style>
 </head>
 <body>
 
@@ -36,18 +68,28 @@ cursor:pointer;
 
 
 <button onclick="gotodb(this);">Non-XHR-Call DB</button></br>
-<div id="no" style="border:1px solid red;width:70%;"></div>
+<div id="no" style="border:1px solid red;width:50%;">
+<figure style="border:2px solid green;margin:3px;">
+<figcaption>Figcaption</figcaption>
+<table id=myt>
+<caption>Caption</caption>
+<thead><tr><th>tasks</th><th>status</th><th>number</th></tr></thead>
+<tbody id=rs3></tbody></table>
+</figure>
+</div>
 
 <script>
 document.getElementById('out').innerHTML="";
 function gotodb(e){
-var dov=document.getElementById('no');
+var dov=document.getElementById('rs3');
 
-var b="<% resul.forEach(function(d){ %><li><%=d.task %></li><% });%>";
+var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.completed %></td><td><%=d._id %></td></tr><% });%>";
 
-var ul=document.createElement('ul');
-    ul.innerHTML="mama <%=resul[1].task %>"+b;
-    dov.appendChild(ul);
+ //var tr=document.createElement('tr');
+ //"mama <%=resul[1].name %>"+
+    //tr.innerHTML=b;
+    //dov.appendChild(tr);
+dov.innerHTML=b;
 
     e.onclick=null;
 }
