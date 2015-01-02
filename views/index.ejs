@@ -62,8 +62,10 @@ display:inline-block;width:6rem;
 <% drinks.forEach(function(drink){ %>
 <li><%=drink.name %> - <%=drink.drunk %></li><% }); %>
 </ul>
-
-<span id='out'>w</span></br>
+<form method="POST" action="/angaben">
+<textarea id="tex" name="non-name" >Putin</textarea>
+<button id="btn-add" onclick="addData(event);">Send data</button></form>
+<span id='out'>wlplplplp</span></br>
 <div id='out4'>test</span>
 
 
@@ -73,17 +75,18 @@ display:inline-block;width:6rem;
 <figcaption>Figcaption</figcaption>
 <table id=myt>
 <caption>Caption</caption>
-<thead><tr><th>tasks</th><th>status</th><th>number</th></tr></thead>
+<thead><tr><th>tasks</th><th>status</th><th>delete</th></tr></thead>
 <tbody id=rs3></tbody></table>
 </figure>
 </div>
 
 <script>
 document.getElementById('out').innerHTML="";
-function gotodb(e){
 var dov=document.getElementById('rs3');
+function gotodb(e){
+ //var dov=document.getElementById('rs3');
 
-var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.done %></td><td><%=d._id %></td></tr><% });%>";
+var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.done %></td><td><input name='<%=d._id %>' class='btn-del' type='button' value='X'/></td></tr><% });%>";
 
  //var tr=document.createElement('tr');
  //"mama <%=resul[1].name %>"+
@@ -91,10 +94,47 @@ var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.done %>
     //dov.appendChild(tr);
 dov.innerHTML=b;
 
-    e.onclick=null;
+    //e.onclick=null;
+
+
+var ddd=dov.getElementsByClassName('btn-del');
+for(var f=0;f<ddd.length;f++){
+var dd=ddd[f];
+//alert(ddd[1].name);
+
+dd.addEventListener('click',dibk,false);
+}
 }
 
-</script>
+
+function dibk(e){
+var target= e && e.target || window.event.srcElement;;
+var vevto=target.name;
+ alert(vevto);
+ // alert(target.parentNode.parentNode.rowIndex);
+/***
+//alert('fu'+vevto);
+var xhr=new XMLHttpRequest();
+xhr.open('POST','/delet',true);
+xhr.onerror=function(e){alert('fucking error');console.log('fuck');
+};
+xhr.onload=function(e){
+
+document.getElementById('status').innerHTML=this.response;};
+
+xhr.send(vevto);
+***/
+var drow=target.parentNode.parentNode.rowIndex;
+    delrow(drow);
+ //setTimeout(function(){alert(12);},1000);
+   //setTimeout(gotodb,1000);
+}
+
+function delrow(drow){
+document.getElementById('myt').deleteRow(drow);
+
+}
+</script>
 
 <button id="btn">XHR-Call DB</button>
 </br></br>
@@ -162,7 +202,27 @@ xhr.onerror=function(e){alert('fuck');console.log('fuck');};
 xhr.send();
 }
 
+function addData(event){
+event.preventDefault();
+var xhr=new XMLHttpRequest();
+xhr.open('POST', '/angaben', true);
+xhr.setRequestHeader('Content-type','application/json');
+xhr.onload=function(e){
+if(this.status ==200){
+var bl=JSON.parse(this.response);
+//document.getElementById('out').innerHTML=this.response;
+document.getElementById('out').innerHTML=bl.name+" "+this.response;
+}
+}
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
 
+var adel=document.getElementById('tex');
+var data={};
+data.name=adel.value;
+var data=JSON.stringify(data)
+xhr.send(data);
+
+}
 
 
 </script>

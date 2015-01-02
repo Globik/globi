@@ -5,7 +5,7 @@ var path=require('path');
 //var favicon=require('serve-favicon');
 //var logger=require('morgan');
 //var cooki=require('cookie-parser');
-//var bodyparser=require('body-parser');
+var bodyparser=require('body-parser');
 
 var app = express();
 app.set('views', path.join(__dirname, 'views'));
@@ -13,27 +13,10 @@ app.set('view engine', 'ejs');
 
 app.set('port', (process.env.PORT || 5000));
 //app.use(logger('dev'));
-//app.use(bodyparser.json());
-/***
-app.use(bodyparser.urlencoded());
-app.use(cooki());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyparser.urlencoded({extended:true}));
+app.use(bodyparser.json());
 
-app.use(express.static(__dirname + '/public'));
-***/
-// app.use(bodyparser());
-//app.use(methodover());
- //app.use(express.router());
-/***
-app.get('/', function(req, res) {
-  
-  res.send("Hello world and Globi_2.0.0.!!!");
-});
-***/
-/***
-//var router = express.Router();
 
-***/
  //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
  var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
@@ -76,7 +59,13 @@ data._id=_id;
 res.send(JSON.stringify(data));
 });
 });
+app.post('/angaben',function(req,res){
+console.log(req.body.name);//yes!!=>val pit
+console.log(req.body);
+//console.log(JSON.parse(req.body.name));
+res.send(req.body);
 
+});
 
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
