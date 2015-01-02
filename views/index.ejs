@@ -1,6 +1,5 @@
-﻿<?xml version=“1.0″ encoding=“UTF-8″?>
-<!DOCTYPE html PUBLIC “-//WAPFORUM//DTD XHTML Mobile 1.1//EN” “http://www.openmobilealliance.org/tech/DTD/xhtml-mobile11.dtd”>
-/>
+﻿
+
 <html>
 <meta charset="UTF-8">
 <head>
@@ -65,54 +64,6 @@ display:inline-block;width:6rem;
 <% drinks.forEach(function(drink){ %>
 <li><%=drink.name %> - <%=drink.drunk %></li><% }); %>
 </ul>
-<a href=“/angaben”
-onclick=“return updateElm(’/angaben’, ‘out45’);” >Get something</a>
-<span id="out45"></span>
-<script>
-function getXHR()
-{
-	if(window.XMLHttpRequest) {
-		req = new XMLHttpRequest();
-		return true;
-	}
-	else try {
-		req = new ActiveXObject('Msxml2.XMLHTTP');
-		return true;
-	} catch(e) {
-		try {
-			req = new ActiveXObject("Microsoft.XMLHTTP");
-			return true;
-		} catch(e) {
-			req = false;
-			return false;
-		}
-	}
-}
-
-function updateElm(url, id)
-{
-	if(getXHR())
-	{
-		req.open('POST', url, true);
-req.setRequestHeader('Content-type','application/json');
-		req.onreadystatechange = function()
-		{
-			if(req.readyState == 4) {
-				if(req.status == 200) {
-					document.getElementById(id).innerHTML = this.responseText+req.responseText;
-				}
-			} 
-		}
-var data={};
-data.name="Pupkin";
-var data=JSON.stringify(data)
-		req.send(data);
-	}
-	else return true;
-	return false;
-}
-
-</script>
 <form method="POST" action="/angaben">
 <textarea id="tex" name="non-name" >Putin</textarea>
 <button id="btn-add" onclick="addData(event);">Send data</button></form>
@@ -187,7 +138,7 @@ document.getElementById('myt').deleteRow(drow);
 }
 </script>
 
-<button id="btn">XHR-Call DB</button>
+<button id="btn" onclick="fuck(this);">XHR-Call DB</button>
 </br></br>
 
 <div id="status"><b>Here can be figcaption</b></div>
@@ -212,6 +163,11 @@ btn.addEventListener('click',fuck,false);
 
 function fuck(e){
 var xhr=new XMLHttpRequest();
+
+if(!xhr.onload){
+if(!window.XDomainRequest) throw new Error("Notsuported");
+xhr = new XDomainRequest();
+}
 xhr.open('GET', '/paramorig', true);
 
 xhr.onload=function(e){
@@ -256,6 +212,10 @@ xhr.send();
 function addData(event){
 event.preventDefault();
 var xhr=new XMLHttpRequest();
+if(!xhr.onload){
+if(!window.XDomainRequest) throw new Error("Notsuported");
+xhr = new XDomainRequest();
+}
 xhr.open('POST', '/angaben', true);
 xhr.setRequestHeader('Content-type','application/json');
 xhr.onload=function(e){
