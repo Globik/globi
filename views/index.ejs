@@ -94,7 +94,7 @@ var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.done %>
  //"mama <%=resul[1].name %>"+
     //tr.innerHTML=b;
     //dov.appendChild(tr);
-dov.innerHTML=b;
+dov.textContent=b;
 
     //e.onclick=null;
 
@@ -164,10 +164,7 @@ btn.addEventListener('click',fuck,false);
 function fuck(e){
 var xhr=new XMLHttpRequest();
 
-if(!xhr.onload){
 
-xhr = new XDomainRequest();
-}
 xhr.open('GET', '/paramorig', true);
 
 xhr.onload=function(e){
@@ -212,10 +209,7 @@ xhr.send();
 function addData(event){
 event.preventDefault();
 var xhr=new XMLHttpRequest();
-if(!xhr.onload){
 
-xhr = new XDomainRequest();
-}
 xhr.open('POST', '/angaben', true);
 xhr.setRequestHeader('Content-type','application/json');
 xhr.onload=function(e){
