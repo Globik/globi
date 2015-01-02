@@ -51,7 +51,81 @@ table#myt tbody td:before{
 content:attr(data-th);font-weight:bold;
 display:inline-block;width:6rem;
 }
-}</style>
+}
+
+.parent {
+  display: flex;
+display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  height: 300px; /* Или что угодно */
+}
+
+.child {
+  width: 100px;  /* Или что угодно */
+  height: 100px; /* Или что угодно */
+  margin: auto;  /* Магия! */
+}
+
+
+#popup{
+ display:table;
+ position:fixed;top:0;left:0;
+ z-index:100;
+ height:100%;
+width:100%;
+background:rgba(240,240,240,.9);
+visibility:hidden;
+//-webkit-animation:animacia 1s 1s forwards;
+cursor:pointer;
+}
+@-webkit-keyframes animacia{
+from {visibility:hidden;}
+to {visibility:visible;}
+}
+#popup figure{
+display: table-cell;
+vertical-align:middle;
+}
+#popup figure:before {
+content:"Закрыть";
+display:block;
+padding: 0 1%;
+border-width:4px 4px 0 4px;
+-webkit-border-radius: 5px 5px 0 0;
+text-align:right;
+color:rgb(88,125,164);
+}
+#popup div,#popup figcaption,#popup figure:before {max-width:500px;
+margin:0 auto;
+border-style:solid;
+border-color:rgb(88,125,164);
+background:#fff;}
+
+#popu div,#popup figcaption{
+padding:1%;
+cursor:default;
+}
+#popup figcaption{
+position:relative;
+border-width:0 4px 0 4px;
+font-size: 150%;
+text-transform:uppercase;
+color:rgb(100,100,100);
+}
+#popup figcaption:before{
+content:"Something";
+color:red;
+font-size:150%;
+vertical-align:middle;
+}
+#popup div{
+border-width:0 4px  4px 4px;
+-webkit-border-radius:0 0 5px 5px;
+}
+
+</style>
 </head>
 <body>
 
@@ -64,16 +138,20 @@ display:inline-block;width:6rem;
 <% drinks.forEach(function(drink){ %>
 <li><%=drink.name %> - <%=drink.drunk %></li><% }); %>
 </ul>
+<div class="no" style="border:1px solid red;width:30%;margin:0">
+
+
+<button onclick="gotodb(this);">Non-XHR-Call DB</button></br>
+
+<figure style="border:2px solid green;position:relative;margin:2%;">
 <form method="POST" action="/angaben">
 <textarea id="tex" name="non-name" >Putin</textarea>
 <button id="btn-add" onclick="addData(event);">Send data</button></form>
 <span id='out'>wlplplplp</span></br>
-<div id='out4'>test</span>
+<span id='out4'>test</span>
 
 
-<button onclick="gotodb(this);">Non-XHR-Call DB</button></br>
-<div id="no" style="border:1px solid red;width:50%;">
-<figure style="border:2px solid green;margin:3px;">
+
 <figcaption>Figcaption</figcaption>
 <table id=myt>
 <caption>Caption</caption>
@@ -82,6 +160,23 @@ display:inline-block;width:6rem;
 </figure>
 </div>
 
+<div style="display:inline;">
+<button id="btn" onclick="fuck(this);">XHR-Call DB</button>
+
+
+<div id="status"><b>Here can be figcaption</b></div>
+<table>
+<caption>Caption about Tasks</caption>
+<thead>
+<tr>
+<th>tasks</th><th>status</th><th>delete</th>
+</tr>
+</thead>
+<tbody id="task-body">
+
+</tbody>
+</table>
+</div>
 <script>
 document.getElementById('out').innerHTML="";
 var dov=document.getElementById('rs3');
@@ -114,50 +209,37 @@ var target= e && e.target || window.event.srcElement;;
 var vevto=target.name;
  alert(vevto);
  // alert(target.parentNode.parentNode.rowIndex);
-/***
-//alert('fu'+vevto);
+
 var xhr=new XMLHttpRequest();
-xhr.open('POST','/delet',true);
-xhr.onerror=function(e){alert('fucking error');console.log('fuck');
-};
+    xhr.open('POST','/delete',true);
+    xhr.setRequestHeader('Content-type','application/json');
+    
+    
 xhr.onload=function(e){
+if(this.status ==200){
+document.getElementById('out').innerHTML=this.response;
+}
+};
 
-document.getElementById('status').innerHTML=this.response;};
+xhr.onerror=function(e){
+alert('fucking error');
+console.log('fuck');
+};
+var data={};
+    data.del=vevto;
+var data=JSON.stringify(data);
+xhr.send(data);
 
-xhr.send(vevto);
-***/
 var drow=target.parentNode.parentNode.rowIndex;
     delrow(drow);
  //setTimeout(function(){alert(12);},1000);
-   //setTimeout(gotodb,1000);
+   setTimeout(fuck,1000);
 }
 
 function delrow(drow){
 document.getElementById('myt').deleteRow(drow);
 
 }
-</script>
-
-<button id="btn" onclick="fuck(this);">XHR-Call DB</button>
-</br></br>
-
-<div id="status"><b>Here can be figcaption</b></div>
-<table>
-<caption>Caption about Tasks</caption>
-<thead>
-<tr>
-<th>tasks</th><th>status</th><th>delete</th>
-</tr>
-</thead>
-<tbody id="task-body">
-
-</tbody>
-</table>
-<div id="container">
-<caption>Tasks</caption>
-<ul id="output" style="border:1px solid blue;width:50%"></ul>
- </div>
-<script>
 
 btn.addEventListener('click',fuck,false);
 
@@ -171,38 +253,21 @@ xhr.onload=function(e){
 if(this.status ==200){
 
 var data=JSON.parse(this.response);
-
+document.getElementById('task-body').innerHTML='';
 for( var key in data.task){
-var div=document.createElement('li');
-var th=document.createElement('tr');
-div.className='contrast';
-th.className='fucking';
-div.setAttribute('data-id',data._id[key]);
 
 var datid=data._id[key];
 var iscompl=data._id[key];
 var  completed=data.completed[key]; 
 var str='<input name="'+datid+'" class="btn-del" type="button" value="X"/>';
-var str2='<input name='+iscompl+' class="btn-compl" type="button" value="'+completed+'" />';
-div.innerHTML=data.task[key]+str2+str;
 
-th.innerHTML='<th>'+data.task[key]+'</th><th>'+completed+'</th><th>'+str+'</th>';
-
-if(!output.childNodes[key]){
-output.appendChild(div);
+if(!document.getElementById('task-body').childNodes[key]){
+document.getElementById('task-body').innerHTML+='<tr><th>'+data.task[key]+'</th><th>'+completed+'</th><th>'+str+'</th></tr>';
+} 
 }
-//if(!document.getElementById('task-body').hasChildNodes()){
-document.getElementById('task-body').appendChild(th);
-//} 
-
-
-}
-
 out.innerHTML="<b>My tasks :<%=title %></b> "+data.task[1];
 }};
 xhr.onerror=function(e){alert('fuck');console.log('fuck');};
-
-
 xhr.send();
 }
 
@@ -226,10 +291,26 @@ var data={};
 data.name=adel.value;
 var data=JSON.stringify(data);
 xhr.send(data);
-
+setTimeout(fuck,1000);
 }
 
 
+</script>
+<button id=okosh>okno</button>
+<div id="popup">
+<figure class="gugu">
+<figcaption> header</figcaption>
+<div>content</div>
+</figure>
+</div>
+<script>
+var ok=document.getElementById('okosh');
+    ok.onclick=show;
+function show(e){}
+document.getElementById('popup').onclick=okno;
+function okno(e){
+if(e.target.nodeName !='DIV' && e.target.nodeName !='FIGCAPTION' || e.keyCode==27){
+document.getElementById('popup').style.display='none';}}
 </script>
 </body>
 </html>

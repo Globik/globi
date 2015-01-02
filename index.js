@@ -62,11 +62,22 @@ res.send(JSON.stringify(data));
 app.post('/angaben',function(req,res){
 console.log(req.body.name);//yes!!=>val pit
 console.log(req.body);
+db.collection('tasks').save({name:req.body.name,completed:false},
+function(err,task){
+if(err) throw err;
+console.log('added: '+req.body.name);});
 //console.log(JSON.parse(req.body.name));
 res.send(req.body);
-
 });
 
+app.post('/delete',function(req,res){
+db.collection('tasks').removeById(req.body.del,function(err,count){
+if(err)throw err;
+console.log("deleted :"+req.body.del);
+
+res.send("OK");
+});
+});
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
