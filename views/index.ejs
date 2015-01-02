@@ -165,7 +165,7 @@ function fuck(e){
 var xhr=new XMLHttpRequest();
 
 if(!xhr.onload){
-if(!window.XDomainRequest) throw new Error("Notsuported");
+
 xhr = new XDomainRequest();
 }
 xhr.open('GET', '/paramorig', true);
@@ -213,7 +213,7 @@ function addData(event){
 event.preventDefault();
 var xhr=new XMLHttpRequest();
 if(!xhr.onload){
-if(!window.XDomainRequest) throw new Error("Notsuported");
+
 xhr = new XDomainRequest();
 }
 xhr.open('POST', '/angaben', true);
