@@ -47,7 +47,7 @@ task=name,_id,done=completed
 
 var data={};
 var task=result.map(function(tw){return tw.task;});
-var completed=result.map(function(tw){return tw.done;});
+var completed=result.map(function(tw){return tw.completed;});
 var _id=result.map(function(tw){return tw._id;});
 data.task=task;
 data.completed=completed
@@ -62,7 +62,7 @@ res.send(JSON.stringify(data));
 app.post('/angaben',function(req,res){
 console.log(req.body.name);//yes!!=>val pit
 console.log(req.body);
-db.collection('tasks').save({task:req.body.name,done:false},
+db.collection('tasks').save({task:req.body.name,completed:false},
 function(err,task){
 if(err) throw err;
 console.log('added: '+req.body.name);});

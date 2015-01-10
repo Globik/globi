@@ -183,12 +183,8 @@ var dov=document.getElementById('rs3');
 function gotodb(e){
  //var dov=document.getElementById('rs3');
 
-var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.done %></td><td><input name='<%=d._id %>' class='btn-del' type='button' value='X'/></td></tr><% });%>";
+var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.completed %></td><td><input name='<%=d._id %>' class='btn-del' type='button' value='X'/></td></tr><% });%>";
 
- //var tr=document.createElement('tr');
- //"mama <%=resul[1].name %>"+
-    //tr.innerHTML=b;
-    //dov.appendChild(tr);
 dov.innerHTML=b;
 
     //e.onclick=null;
@@ -257,15 +253,15 @@ document.getElementById('task-body').innerHTML='';
 for( var key in data.task){
 
 var datid=data._id[key];
-var iscompl=data._id[key];
-var  completed=data.completed[key]; 
+ 
 var str='<input name="'+datid+'" class="btn-del" type="button" value="X"/>';
 
 if(!document.getElementById('task-body').childNodes[key]){
-document.getElementById('task-body').innerHTML+='<tr><th>'+data.task[key]+'</th><th>'+completed+'</th><th>'+str+'</th></tr>';
+document.getElementById('task-body').innerHTML+='<tr><th>'
++data.task[key]+'</th><th>'+data.completed[key]+'</th><th>'+str+'</th></tr>';
 } 
 }
-out.innerHTML="<b>My tasks :<%=title %></b> "+data.task[1];
+out.innerHTML="<b>My tasks :<%=title %></b> "
 }};
 xhr.onerror=function(e){alert('fuck');console.log('fuck');};
 xhr.send();
@@ -294,7 +290,14 @@ xhr.send(data);
 setTimeout(fuck,1000);
 }
 
-
+function htmlEscape(str){
+return String(str)
+.replace(/&/g,'&amp;')
+.replace(/"/g,'&quot;')
+.replace(/'/g,'&#39;')
+.replace(/</g,'&lt;')
+.replace(/>/g,'&gt;');
+}
 </script>
 <button id=okosh>okno</button>
 <div id="popup">
