@@ -1,0 +1,22 @@
+<% if (message) { %>
+<p><%= message %></p>
+<% } %>
+
+<% if (message.length > 0) { %>
+<%= message %>
+<% } %>
+
+<form action="/login" method="post">
+	<div>
+	<label>Username:</label>
+	<input type="text" name="username"/><br/>
+	</div>
+	<div>
+	<label>Password:</label>
+	<input type="password" name="password"/>
+	</div>
+	<div>
+	<input type="submit" value="Submit"/>
+	</div>
+</form>
+<p><small>nt - b:s</small></p>

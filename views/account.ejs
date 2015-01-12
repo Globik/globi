@@ -1,0 +1,135 @@
+Username: <%= user.username %>
+
+Email: <%= user.email %>
+
+User ID: <%= user.id %>
+
+User password: <%= user.password %>
+</br>
+<div id="status"><b>Here can be figcaption</b></div>
+<table>
+<caption>Caption about Tasks</caption>
+<thead>
+<tr>
+<th>tasks</th><th>status</th><th>edit</th>
+</tr>
+</thead>
+<tbody id="task-body">
+
+</tbody>
+</table>
+</div>
+<button id=bu onclick="callDB(this)">callDB</button>
+</br>
+<textarea id="edittex" name="non-name" placeholder="edit this" ></textarea>
+<button id="btn-add" onclick="addEdit(event);">edit data</button>
+</br>
+<span id='out'>wlplplplp</span></br>
+<span id='out4'>test</span>
+<span id='txarout'></span>
+<script>
+
+function callDB(e){
+var xhr=new XMLHttpRequest();
+
+
+xhr.open('GET', '/paramorig', true);
+
+xhr.onload=function(e){
+if(this.status ==200){
+
+var data=JSON.parse(this.response);
+document.getElementById('task-body').innerHTML='';
+
+for( var key in data.task){
+
+var datid=data._id[key];
+ 
+var str='<input data-numb="'+datid+'" class="btn-edit" type="button" value="edit"/>';
+//editTx.textContent=data.task[8];
+if(!document.getElementById('task-body').childNodes[key]){
+document.getElementById('task-body').innerHTML+='<tr><th>'
++data.task[key]+'</th><th>'+data.completed[key]+'</th><th>'+str+'</th></tr>';
+} 
+}
+}
+
+var divstat=document.getElementById('task-body');
+var edits=divstat.getElementsByClassName('btn-edit');
+for(var i=0;i<edits.length;i++){
+var edit=edits[i];
+edit.addEventListener('click',editdibk,false);
+}
+};
+xhr.send();
+
+}
+
+var editTx=document.getElementById('edittex');
+var txarout=document.getElementById('txarout');
+txarout.textContent=editTx.value='';
+
+function editdibk(e){
+var eved=e.target;
+var showeved=eved.getAttribute('data-numb');
+ editTx.setAttribute('data-edit',showeved);
+//alert(showeved +' data.task: //'+e.target.parentNode.parentNode.textContent);
+event.preventDefault();
+var txarout=document.getElementById('txarout');
+//txarout.textContent=
+editTx.value=e.target.parentNode.parentNode.firstChild.innerHTML;
+
+
+/***
+var xhr=new XMLHttpRequest();
+
+xhr.open('POST', '/edit', true);
+xhr.setRequestHeader('Content-type','application/json');
+editTx.textContent='';
+xhr.onload=function(e){
+if(this.status ==200){
+var txarout=document.getElementById('txarout');
+txarout.textContent=editTx.value=this.response;
+
+}
+}
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
+***/
+/***
+var data={};
+    data.editi=showeved;
+var data=JSON.stringify(data);
+//xhr.send(data);
+***/
+}
+
+function addEdit(event){
+event.preventDefault();
+var xhr=new XMLHttpRequest();
+
+xhr.open('POST', '/savedit', true);
+xhr.setRequestHeader('Content-type','application/json');
+xhr.onload=function(e){
+if(this.status ==200){
+
+//document.getElementById('out').innerHTML=this.response;
+//document.getElementById('edittex').textContent='';
+document.getElementById('out').innerHTML=this.response;
+}
+}
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
+
+var adel=document.getElementById('tex');
+var data={};
+var txarout=document.getElementById('txarout');
+txarout.textContent=editTx.value;
+data.name=txarout.textContent;
+data._id=editTx.getAttribute('data-edit');
+//data.name=htmlEscape(adel.value);
+var data=JSON.stringify(data);
+xhr.send(data);
+
+setTimeout(callDB,1000);
+}
+
+</script>

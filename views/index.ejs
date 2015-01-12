@@ -131,6 +131,24 @@ border-width:0 4px  4px 4px;
 
 
 <h1>The Test</h1>
+
+
+<% if (!user) { %>
+
+	<h2>Welcome! Please log in.</h2>
+<p>
+			<a href="/">Home</a> | 
+			<a href="/login">Log In</a>
+			</p>
+<% } else { %>
+<a href="/">Home</a> | 
+			<a href="/account">Account</a> | 
+			<a href="/logout">Log Out</a>
+			</p>
+	<h2>Hello, <%= user.username %>.</h2>
+<% } %>
+
+
 <p><%=title %></p>
 
 <h2>Loop</h2>
@@ -145,11 +163,17 @@ border-width:0 4px  4px 4px;
 
 <figure style="border:2px solid green;position:relative;margin:2%;">
 <form method="POST" action="/angaben">
-<textarea id="tex" name="non-name" >Putin</textarea>
+<% if(user){ %>
+<textarea id="tex" name="non-name" placeholder="type this" ></textarea>
 <button id="btn-add" onclick="addData(event);">Send data</button></form>
+<br>
+<textarea id="edittex" name="non-name" placeholder="edit this" ></textarea>
+<button id="btn-add" onclick="addEdit(event);">edit data</button>
+<% } %>
+</br>
 <span id='out'>wlplplplp</span></br>
 <span id='out4'>test</span>
-
+<span id='txarout'></span>
 
 
 <figcaption>Figcaption</figcaption>
@@ -160,16 +184,16 @@ border-width:0 4px  4px 4px;
 </figure>
 </div>
 
-<div style="display:inline;">
+<% if(user) { %>
 <button id="btn" onclick="fuck(this);">XHR-Call DB</button>
-
+<% } %>
 
 <div id="status"><b>Here can be figcaption</b></div>
 <table>
 <caption>Caption about Tasks</caption>
 <thead>
 <tr>
-<th>tasks</th><th>status</th><th>delete</th>
+<th>tasks</th><th>status</th><th>edit</th>
 </tr>
 </thead>
 <tbody id="task-body">
@@ -178,18 +202,20 @@ border-width:0 4px  4px 4px;
 </table>
 </div>
 <script>
+var editTx=document.getElementById('edittex');
 document.getElementById('out').innerHTML="";
 var dov=document.getElementById('rs3');
 function gotodb(e){
  //var dov=document.getElementById('rs3');
 
-var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.completed %></td><td><input name='<%=d._id %>' class='btn-del' type='button' value='X'/></td></tr><% });%>";
+var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.completed %></td><td><% if(user){ %><input name='<%=d._id %>' class='btn-del' type='button' value='X'/><% } %></td></tr><% });%>";
 
 dov.innerHTML=b;
 
     //e.onclick=null;
 
-
+//document.body.innerHTML=b;
+//document.body.write=b;
 var ddd=dov.getElementsByClassName('btn-del');
 for(var f=0;f<ddd.length;f++){
 var dd=ddd[f];
@@ -250,22 +276,72 @@ if(this.status ==200){
 
 var data=JSON.parse(this.response);
 document.getElementById('task-body').innerHTML='';
+
 for( var key in data.task){
 
 var datid=data._id[key];
  
-var str='<input name="'+datid+'" class="btn-del" type="button" value="X"/>';
-
+var str='<input data-numb="'+datid+'" class="btn-edit" type="button" value="edit"/>';
+//editTx.textContent=data.task[8];
 if(!document.getElementById('task-body').childNodes[key]){
 document.getElementById('task-body').innerHTML+='<tr><th>'
 +data.task[key]+'</th><th>'+data.completed[key]+'</th><th>'+str+'</th></tr>';
 } 
 }
-out.innerHTML="<b>My tasks :<%=title %></b> "
-}};
-xhr.onerror=function(e){alert('fuck');console.log('fuck');};
-xhr.send();
 }
+
+var divstat=document.getElementById('task-body');
+var edits=divstat.getElementsByClassName('btn-edit');
+for(var i=0;i<edits.length;i++){
+var edit=edits[i];
+edit.addEventListener('click',editdibk,false);}
+};
+xhr.send();
+out.innerHTML="<b>My tasks :<%=title %></b> "
+}
+
+//editTx.textContent='';
+//editTx.value='';
+
+var txarout=document.getElementById('txarout');
+txarout.textContent=editTx.value='';
+
+function editdibk(e){
+var eved=e.target;
+var showeved=eved.getAttribute('data-numb');
+ editTx.setAttribute('data-edit',showeved);
+//alert(showeved +' data.task: //'+e.target.parentNode.parentNode.textContent);
+event.preventDefault();
+var txarout=document.getElementById('txarout');
+//txarout.textContent=
+editTx.value=e.target.parentNode.parentNode.firstChild.innerHTML;
+
+
+/***
+var xhr=new XMLHttpRequest();
+
+xhr.open('POST', '/edit', true);
+xhr.setRequestHeader('Content-type','application/json');
+editTx.textContent='';
+xhr.onload=function(e){
+if(this.status ==200){
+var txarout=document.getElementById('txarout');
+txarout.textContent=editTx.value=this.response;
+
+}
+}
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
+***/
+var data={};
+    data.editi=showeved;
+var data=JSON.stringify(data);
+//xhr.send(data);
+
+
+
+}
+
+
 
 function addData(event){
 event.preventDefault();
@@ -284,9 +360,41 @@ xhr.onerror=function(e){alert('fuck');console.log('fuck');};
 
 var adel=document.getElementById('tex');
 var data={};
-data.name=adel.value;
+var txarout=document.getElementById('txarout');
+txarout.textContent=adel.value;
+data.name=txarout.textContent;
+//data.name=htmlEscape(adel.value);
 var data=JSON.stringify(data);
 xhr.send(data);
+setTimeout(fuck,1000);
+}
+
+function addEdit(event){
+event.preventDefault();
+var xhr=new XMLHttpRequest();
+
+xhr.open('POST', '/savedit', true);
+xhr.setRequestHeader('Content-type','application/json');
+xhr.onload=function(e){
+if(this.status ==200){
+
+//document.getElementById('out').innerHTML=this.response;
+//document.getElementById('edittex').textContent='';
+document.getElementById('out').innerHTML=this.response;
+}
+}
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
+
+var adel=document.getElementById('tex');
+var data={};
+var txarout=document.getElementById('txarout');
+txarout.textContent=editTx.value;
+data.name=txarout.textContent;
+data._id=editTx.getAttribute('data-edit');
+//data.name=htmlEscape(adel.value);
+var data=JSON.stringify(data);
+xhr.send(data);
+
 setTimeout(fuck,1000);
 }
 
@@ -299,14 +407,9 @@ return String(str)
 .replace(/>/g,'&gt;');
 }
 </script>
-<button id=okosh>okno</button>
-<div id="popup">
-<figure class="gugu">
-<figcaption> header</figcaption>
-<div>content</div>
-</figure>
-</div>
+
 <script>
+/***
 var ok=document.getElementById('okosh');
     ok.onclick=show;
 function show(e){}
@@ -314,6 +417,8 @@ document.getElementById('popup').onclick=okno;
 function okno(e){
 if(e.target.nodeName !='DIV' && e.target.nodeName !='FIGCAPTION' || e.keyCode==27){
 document.getElementById('popup').style.display='none';}}
+***/
 </script>
+
 </body>
 </html>
