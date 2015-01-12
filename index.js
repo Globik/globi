@@ -2,7 +2,7 @@ var flash = require('connect-flash')
 var express = require('express');
 var path=require('path');
 var passport=require('passport');
-var cookieParser=require('cookie-parser');
+//var cookieParser=require('cookie-parser');
 var bodyparser=require('body-parser');
 var session=require('express-session');
 
@@ -65,7 +65,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.set('port', (process.env.PORT || 5000));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 app.use(session({secret:'some string',resave:false,saveUninitialized:true}));
@@ -74,7 +74,7 @@ app.use(flash());
   app.use(passport.session());
 
 
- //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+// var db=require('mongoskin').db("mongodb://localhost:27017/todo");
  var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***
