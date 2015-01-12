@@ -74,7 +74,7 @@ app.use(flash());
   app.use(passport.session());
 
 
-// var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+ //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
  var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***

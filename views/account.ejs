@@ -22,11 +22,11 @@ User password: <%= user.password %>
 <button id=bu onclick="callDB(this)">callDB</button>
 </br>
 <textarea id="edittex" name="non-name" placeholder="edit this" ></textarea>
-<button id="btn-add" onclick="addEdit(event);">edit data</button>
+<button id="btn-add" onclick="addEdit(this);">edit data</button>
 </br>
-<span id='out'>wlplplplp</span></br>
 <span id='out4'>test</span>
 <span id='txarout'></span>
+<span id='out'></span>
 <script>
 
 function callDB(e){
@@ -74,7 +74,7 @@ var eved=e.target;
 var showeved=eved.getAttribute('data-numb');
  editTx.setAttribute('data-edit',showeved);
 //alert(showeved +' data.task: //'+e.target.parentNode.parentNode.textContent);
-event.preventDefault();
+e.preventDefault();
 var txarout=document.getElementById('txarout');
 //txarout.textContent=
 editTx.value=e.target.parentNode.parentNode.firstChild.innerHTML;
@@ -103,8 +103,8 @@ var data=JSON.stringify(data);
 ***/
 }
 
-function addEdit(event){
-event.preventDefault();
+function addEdit(e){
+//e.preventDefault();
 var xhr=new XMLHttpRequest();
 
 xhr.open('POST', '/savedit', true);

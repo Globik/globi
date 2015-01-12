@@ -311,7 +311,7 @@ var eved=e.target;
 var showeved=eved.getAttribute('data-numb');
  editTx.setAttribute('data-edit',showeved);
 //alert(showeved +' data.task: //'+e.target.parentNode.parentNode.textContent);
-event.preventDefault();
+e.preventDefault();
 var txarout=document.getElementById('txarout');
 //txarout.textContent=
 editTx.value=e.target.parentNode.parentNode.firstChild.innerHTML;
