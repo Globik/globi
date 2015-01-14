@@ -10,6 +10,8 @@ var session=require('express-session');
 var express = require('express');
 var app = express();
 
+var routes=require('./routes/index');
+
 var LocalStrategy = require('passport-local').Strategy;
 var users = [
     { id: 1, username: 'bob', password: 'secret', email: 'bob@example.com' }
@@ -81,6 +83,14 @@ app.use(passport.session());
 
 var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
+app.use('/', routes);
+
+/***
 app.get('/', function(req, res) {
 var drinks=[
 {name:'Bloody Mary',drunk:3},
@@ -93,14 +103,15 @@ if(err)throw err;
 
   res.render('index', { drinks:drinks, title: 'Express',user:req.user,resul:result});
 });});
+***/
 
 
-
-
+/***
 app.get('/', function(request, response) {
  
   response.send("  Hello world and Globi!!!");
 });
+***/
 
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));

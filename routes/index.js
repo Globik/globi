@@ -1,13 +1,21 @@
-var express = require('express');
-var app = express();
+//!!!! routes/index.js !!!!
 
-app.set('port', (process.env.PORT || 5000));
+var express=require('express');
+var router=express.Router();
+var passport=require('passport');
 
-app.get('/', function(request, response) {
- 
-  response.send("  Hello world and Globi!!!");
-});
+router.get('/', function(req, res) {
+var db=req.db;
+var drinks=[
+{name:'Bloody Mary',drunk:3},
+{name:'Alik',drunk:5},
+{name:'Dima',drunk:10}
+];
 
-app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'));
-});
+db.collection('tasks').find().toArray(function(err,result){
+if(err)throw err;
+
+  res.render('index', { drinks:drinks, title: 'Express',user:req.user,resul:result});
+});});
+module.exports = router;
+
