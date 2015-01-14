@@ -2,7 +2,7 @@ var flash = require('connect-flash')
 var express = require('express');
 var path=require('path');
 //var passport=require('passport');
-var cookieParser=require('cookie-parser');
+//var cookieParser=require('cookie-parser');
 //var bodyparser=require('body-parser');
 //var met=require('method-override');
 
