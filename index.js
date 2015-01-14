@@ -72,7 +72,7 @@ app.use(cookieParser());
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
 app.use(met());
-app.use(sessio({secret:'somestring',resave:false,saveUninitialized:true}));
+app.use(session({secret:'somestring',resave:false,saveUninitialized:true}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
