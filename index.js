@@ -80,12 +80,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
- //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+ var db=require('mongoskin').db("mongodb://localhost:27017/todo");
 
 
 
 
- var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+ //var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
@@ -151,12 +151,12 @@ app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
 
-/***
+
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 }
-***/
+
 /***
 cd mon/bin
 mongod -dbpath c:/users/user/mon/data/db
