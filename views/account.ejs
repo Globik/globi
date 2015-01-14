@@ -1,3 +1,5 @@
+<a href='/'>home</a><br><a href='/logout'>logout</a>
+
 Username: <%= user.username %>
 
 Email: <%= user.email %>
@@ -6,12 +8,15 @@ User ID: <%= user.id %>
 
 User password: <%= user.password %>
 </br>
+<textarea id="tex" name="non-name" placeholder="type this" ></textarea>
+<button id="btn-add" onclick="addData(event);">Send data</button></form>
+<br>
 <div id="status"><b>Here can be figcaption</b></div>
 <table>
 <caption>Caption about Tasks</caption>
 <thead>
 <tr>
-<th>tasks</th><th>status</th><th>edit</th>
+<th>tasks</th><th>status</th><th>edit</th><th>delete</th>
 </tr>
 </thead>
 <tbody id="task-body">
@@ -27,6 +32,9 @@ User password: <%= user.password %>
 <span id='out4'>test</span>
 <span id='txarout'></span>
 <span id='out'></span>
+<button onclick="doDel(this);">POST delete</button></br>
+<button onclick="doGetDel(this);">GET delete</button></br>
+<button onclick="doDeleteDel(this);">DELETE delete</button>
 <script>
 
 function callDB(e){
@@ -46,10 +54,11 @@ for( var key in data.task){
 var datid=data._id[key];
  
 var str='<input data-numb="'+datid+'" class="btn-edit" type="button" value="edit"/>';
+var str2='<input data-numb="'+datid+'" class="btn-del" type="button" value="delete" onclick="deleteTask(this)"/>';
 //editTx.textContent=data.task[8];
 if(!document.getElementById('task-body').childNodes[key]){
 document.getElementById('task-body').innerHTML+='<tr><th>'
-+data.task[key]+'</th><th>'+data.completed[key]+'</th><th>'+str+'</th></tr>';
++data.task[key]+'</th><th>'+data.completed[key]+'</th><th>'+str+'</th><th>'+str2+'</th></tr>';
 } 
 }
 }
@@ -105,6 +114,10 @@ var data=JSON.stringify(data);
 
 function addEdit(e){
 //e.preventDefault();
+var errCount=0;
+if(editTx.value === ''){errCount++}
+
+if(errCount === 0){
 var xhr=new XMLHttpRequest();
 
 xhr.open('POST', '/savedit', true);
@@ -125,11 +138,102 @@ var txarout=document.getElementById('txarout');
 txarout.textContent=editTx.value;
 data.name=txarout.textContent;
 data._id=editTx.getAttribute('data-edit');
-//data.name=htmlEscape(adel.value);
+
 var data=JSON.stringify(data);
 xhr.send(data);
 
 setTimeout(callDB,1000);
+} else{ alert('Please fill in the field');}
 }
 
+
+function addData(event){
+event.preventDefault();
+var errCount=0;
+if(document.getElementById('tex').value ===''){
+errCount++;}
+ if(errCount === 0){
+var xhr=new XMLHttpRequest();
+
+xhr.open('POST', '/angaben', true);
+xhr.setRequestHeader('Content-type','application/json');
+xhr.onload=function(e){
+if(this.status ==200){
+var bl=JSON.parse(this.response);
+
+document.getElementById('out').innerHTML=bl.name+" "+this.response;
+}
+}
+xhr.onerror=function(e){alert('Ajax not available');console.log('fuck');};
+
+var adel=document.getElementById('tex');
+var data={};
+var txarout=document.getElementById('txarout');
+txarout.textContent=adel.value;
+data.name=txarout.textContent;
+//data.name=htmlEscape(adel.value);
+var data=JSON.stringify(data);
+xhr.send(data);
+setTimeout(callDB,1000);
+} else{ alert("Please fill in the field");return false;}
+}
+
+function deleteTask(el){
+//var el=e.target;
+var show=el.getAttribute('data-numb');
+var confirmation = confirm('Are you sure you want to delete this task?');
+if (confirmation === true) {
+
+alert("OK, man, I'm about deleting this id of task:"+show);}
+else{ return false;}
+}
+
+//*****
+function doDel(event){
+var xhr=new XMLHttpRequest();
+
+xhr.open('POST', '/delta', true);
+xhr.setRequestHeader('Content-type','application/json');
+xhr.onload=function(e){
+if(this.status ==200){
+
+document.getElementById('out').innerHTML=this.response;
+}
+}
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
+var data={};
+data.name="alik";
+
+xhr.send(JSON.stringify(data));
+}
+function doGetDel(event){
+var xhr=new XMLHttpRequest();
+
+xhr.open('GET', '/alfa/gafu', true);
+//xhr.setRequestHeader('Content-type','application/json');
+xhr.onload=function(e){
+if(this.status ==200){
+
+document.getElementById('out').innerHTML=this.response;
+}
+}
+
+xhr.send();
+}
+
+function doDeleteDel(event){
+var xhr=new XMLHttpRequest();
+
+xhr.open('DELETE', '/deletetask/666', true);
+//xhr.setRequestHeader('Content-type','application/json');
+xhr.onload=function(e){
+if(this.status ==200){
+
+document.getElementById('out').innerHTML=this.response;
+}
+}
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
+
+xhr.send();
+}
 </script>

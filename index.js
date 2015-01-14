@@ -2,9 +2,14 @@ var flash = require('connect-flash')
 var express = require('express');
 var path=require('path');
 var passport=require('passport');
-//var cookieParser=require('cookie-parser');
+var cookieParser=require('cookie-parser');
 var bodyparser=require('body-parser');
+var met=require('method-override');
 var session=require('express-session');
+
+var routes =require('./routes/index');
+
+var database = require('./routes/database');
 
 var LocalStrategy = require('passport-local').Strategy;
 var users = [
@@ -65,21 +70,44 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.set('port', (process.env.PORT || 5000));
-//app.use(cookieParser());
+app.use(cookieParser());
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
+app.use(met());
 app.use(session({secret:'some string',resave:false,saveUninitialized:true}));
 app.use(flash());
- app.use(passport.initialize());
-  app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
  //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+
+
+
+
  var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
 ***/
+
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
+
+/***
+var rout=express.Router();
+rout.get('/hallo/:name',function(req,res){
+res.send('hallo'+req.params.name);res.render('index');});
+app.use('/dooo',rout);
+***/
+
+app.use('/', routes);
+
+app.use('/', database);
+
+/***
 app.get('/', function(req, res) {
 var drinks=[
 {name:'Bloody Mary',drunk:3},
@@ -92,11 +120,13 @@ if(err)throw err;
 
   res.render('index', { drinks:drinks, title: 'Express',user:req.user,resul:result});
 });});
-
+***/
+/***
 app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
-
+***/
+/***
 app.get('/login', function(req, res){
   res.render('login', { user: req.user, message: req.flash('error') });
 });
@@ -112,88 +142,24 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-
-
-app.get('/paramorig',function(req,res){
-
-db.collection('tasks').find().toArray(function(err,result){
-if(err)throw err;
-/***
-task=name,_id,done=completed
-
 ***/
 
-var data={};
-var task=result.map(function(tw){return tw.task;});
-var completed=result.map(function(tw){return tw.completed;});
-var _id=result.map(function(tw){return tw._id;});
-data.task=task;
-data.completed=completed
-data._id=_id;
-//var cb=JSON.stringify(data);
-//console.log(cb);
-//console.log(result);
-//console.log('req.param '+req.param);
-res.send(JSON.stringify(data));
-});
-});
-app.post('/angaben',function(req,res){
-console.log(req.body.name);//yes!!=>val pit
-console.log(req.body);
-db.collection('tasks').save({task:req.body.name,completed:false},
-function(err,task){
-if(err) throw err;
-console.log('added: '+req.body.name);});
-//console.log(JSON.parse(req.body.name));
-res.send(req.body);
-});
 
-app.post('/delete',function(req,res){
-db.collection('tasks').removeById(req.body.del,function(err,count){
-if(err)throw err;
-console.log("deleted :"+req.body.del);
-
-res.send("OK");
-});
-});
-
-app.post('/edit',function(req,res){
-
-db.collection('tasks').findById(req.body.editi,function(err,result){
-if(err)throw err;
-console.log("get :"+req.body.editi);
-console.log("result is found :"+result.task);
-
-res.send(result.task);
-});
-
-//console.log(req.body.editi);
-//res.send(req.body.editi);
-});
-
-app.post('/savedit',function(req,res){
-db.collection('tasks').updateById(req.body._id,{$set:{task:req.body.name}},function(err,result){
-if(err)throw err;
-console.log('You trying update req.body.name: '+req.body.name);
-console.log('req.body._id: '+req.body._id);
-res.send(req.body.name);
-});
-
-//console.log('req.body.name: '+req.body.name);
-//console.log('req.body._id: '+req.body._id);
-//res.send(req.body.name);
-});
 
 
 app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'));
 });
 
+/***
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 }
+***/
 /***
 cd mon/bin
 mongod -dbpath c:/users/user/mon/data/db
+
+globibot/bot/hrkbot/node index
 ***/
