@@ -17,5 +17,31 @@ if(err)throw err;
 
   res.render('index', { drinks:drinks, title: 'Express',user:req.user,resul:result});
 });});
+
+router.get('/account', ensureAuthenticated, function(req, res){
+  res.render('account', { user: req.user });
+});
+
+
+router.get('/login', function(req, res){
+  res.render('login', { user: req.user, message: req.flash('error') });
+});
+
+router.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login', failureFlash: true }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+router.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { return next(); }
+  res.redirect('/login');
+}
+
 module.exports = router;
 
