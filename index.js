@@ -73,7 +73,7 @@ app.set('port', (process.env.PORT || 5000));
 app.use(cookieParser());
 app.use(bodyparser.urlencoded({extended:true}));
 app.use(bodyparser.json());
-app.use(met());
+//app.use(met());
 app.use(session({secret:'some string',resave:false,saveUninitialized:true}));
 app.use(flash());
 app.use(passport.initialize());
