@@ -11,6 +11,7 @@ var express = require('express');
 var app = express();
 
 var routes=require('./routes/index');
+var database = require('./routes/database');
 
 var LocalStrategy = require('passport-local').Strategy;
 var users = [
@@ -89,6 +90,8 @@ app.use(function(req,res,next){
 });
 
 app.use('/', routes);
+app.use('/',database);
+
 
 /***
 app.get('/', function(req, res) {
