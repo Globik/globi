@@ -7,7 +7,7 @@ var bodyparser=require('body-parser');
 var met=require('method-override');
 var session=require('express-session');
 
-var routes =require('./routes/index');
+//var routes =require('./routes/index');
 
 var database = require('./routes/database');
 
@@ -103,11 +103,11 @@ res.send('hallo'+req.params.name);res.render('index');});
 app.use('/dooo',rout);
 ***/
 
-app.use('/', routes);
+//app.use('/', routes);
 
 app.use('/', database);
 
-/***
+
 app.get('/', function(req, res) {
 var drinks=[
 {name:'Bloody Mary',drunk:3},
@@ -120,13 +120,13 @@ if(err)throw err;
 
   res.render('index', { drinks:drinks, title: 'Express',user:req.user,resul:result});
 });});
-***/
-/***
+
+
 app.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
-***/
-/***
+
+
 app.get('/login', function(req, res){
   res.render('login', { user: req.user, message: req.flash('error') });
 });
@@ -142,7 +142,7 @@ app.get('/logout', function(req, res){
   res.redirect('/');
 });
 
-***/
+
 
 
 
