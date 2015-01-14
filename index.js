@@ -80,12 +80,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
- var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+ //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
 
 
 
 
- //var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+ var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
