@@ -90,12 +90,12 @@ app.use(passport.session());
 /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
 ***/
-
+/***
 app.use(function(req,res,next){
     req.db = db;
     next();
 });
-
+***/
 /***
 var rout=express.Router();
 rout.get('/hallo/:name',function(req,res){
