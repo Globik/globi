@@ -9,7 +9,7 @@ var session=require('express-session');
 
 //var routes =require('./routes/index');
 
-var database = require('./routes/database');
+//var database = require('./routes/database');
 
 var LocalStrategy = require('passport-local').Strategy;
 var users = [
@@ -105,7 +105,7 @@ app.use('/dooo',rout);
 
 //app.use('/', routes);
 
-app.use('/', database);
+//app.use('/', database);
 
 
 app.get('/', function(req, res) {
