@@ -1,12 +1,16 @@
-<a href='/'>home</a><br><a href='/logout'>logout</a>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<% include head %>
+</head>
+<body>
+<header> <% include header %></header>
+
+<p><a href='/'>home</a> | <a href='/logout'>logout</a></p>
 
 Username: <%= user.username %>
 
-Email: <%= user.email %>
-
-User ID: <%= user.id %>
-
-User password: <%= user.password %>
 </br>
 <textarea id="tex" name="non-name" placeholder="type this" ></textarea>
 <button id="btn-add" onclick="addData(event);">Send data</button></form>
@@ -237,3 +241,6 @@ xhr.onerror=function(e){alert('fuck');console.log('fuck');};
 xhr.send();
 }
 </script>
+<footer><% include footer %></footer>
+</body>
+</html>

@@ -1,26 +1,10 @@
 ﻿
+<!DOCTYPE html>
+<html lang="en">
 
-<html>
-<meta charset="UTF-8">
 <head>
+<% include head %>
 <style>
-.contrast{color:green;}
-.trast{color:red;}
-.yell{color:blue;}
-.newfucker{color:brown;}
-.btn-compl{color:red;}
-.btn-del{color:brown;}
-.fucking{color:green;display:}
-input[type="button"],
-input[type="checkbox"],
-input[type="radio"] {
-cursor:pointer;
- -webkit-appearance: button;
-  padding: 5;
-  box-sizing: border-box;
-}
-
-body{font-size:16px;}
 table#myt caption {
 font-size:2rem;
 color:#444;
@@ -53,10 +37,13 @@ display:inline-block;width:6rem;
 }
 }
 
-</style>
+</style> 
 </head>
 <body>
 
+<header class="haupt-header">
+<% include header %>
+</header>
 
 <h1>The Test</h1>
 
@@ -82,20 +69,13 @@ display:inline-block;width:6rem;
 <h2>Loop</h2>
 <ul>
 <% drinks.forEach(function(drink){ %>
-<li><%=drink.name %> - <%=drink.drunk %></li><% }); %>
+<li><%-drink.name %> - <%-drink.drunk %></li><% }); %>
 </ul>
-<div class="no" style="border:1px solid red;width:30%;margin:0">
-
-
-<button onclick="gotodb(this);">Non-XHR-Call DB</button></br>
 
 
 
 </br>
 <span id='out'></span></br>
-
-
-
 
 <table id=myt>
 <caption>Caption</caption>
@@ -106,12 +86,13 @@ display:inline-block;width:6rem;
 
 
 <script>
+document.body.onload=gotodb;
 document.getElementById('out').innerHTML="";
 var dov=document.getElementById('rs3');
 function gotodb(e){
  
 
-var b="<% resul.forEach(function(d){ %><tr><td><%=d.task %></td><td><%=d.completed %></td><td><% if(user){ %><input name='<%=d._id %>' class='btn-del' type='button' value='X'/><% } %></td></tr><% });%>";
+var b="<% resul.forEach(function(d){ %><tr><td><%= d.task %></td><td><%=d.completed %></td><td><% if(user){ %><input name='<%=d._id %>' class='btn-del' type='button' value='X'/><% } %></td></tr><% });%>";
 
 dov.innerHTML=b;
 
@@ -160,11 +141,10 @@ function delrow(drow){
 document.getElementById('myt').deleteRow(drow);
 
 }
-
-
 </script>
 
 
-
+</br>
+<footer><% include footer %></footer>
 </body>
 </html>
