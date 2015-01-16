@@ -5,20 +5,24 @@
 <% include head %>
 
 <style>
-.site{
+.wrapper{
+
+display:-webkit-box;
+display:-webkit-flex;
 display:flex;
+
 min-height:100vh;
 flex-direction:column;
 }
-.mainsite{flex:1;}
-
+.fuck{flex: 1}
 </style>
 </head>
-<body class="site">
-<header class="haupt-header">
+<body class="wrapper">
+
+<header class="header">
 <% include header %>
 </header>
-<main class="mainsite">
+<main class="fuck">
 <% if (message) { %>
 <p><%= message %></p>
 <% } %>
@@ -44,6 +48,7 @@ flex-direction:column;
 </form><p><small>nt - b:s</small></p></fieldset>
 
 </main>
-<footer><% include footer %></footer>
+<footer class="footer"><% include footer %></footer>
+
 </body>
 </html>

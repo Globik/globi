@@ -3,15 +3,33 @@
 
 <head>
 <% include head %>
+<style>
+.wrapper{
+
+display:-webkit-box;
+display:-webkit-flex;
+display:flex;
+/**
+align-items:center;
+**/
+margin:auto;
+min-height:100vh;
+flex-direction:column;
+}
+.newfuck{display:flex;align-items:center;}
+.fuck{flex: 1}
+</style>
 </head>
-<body>
+<body class="wrapper">
 <header> <% include header %></header>
+<main class="fuck">
 
 <p><a href='/'>home</a> | <a href='/logout'>logout</a></p>
 
 Username: <%= user.username %>
 
 </br>
+<div class="newfuck">
 <textarea id="tex" name="non-name" placeholder="type this" ></textarea>
 <button id="btn-add" onclick="addData(event);">Send data</button></form>
 <br>
@@ -31,14 +49,15 @@ Username: <%= user.username %>
 <button id=bu onclick="callDB(this)">callDB</button>
 </br>
 <textarea id="edittex" name="non-name" placeholder="edit this" ></textarea>
-<button id="btn-add" onclick="addEdit(this);">edit data</button>
-</br>
+<button id="btn-add" onclick="addEdit(this);">edit data</button></div>
+
 <span id='out4'>test</span>
 <span id='txarout'></span>
 <span id='out'></span>
 <button onclick="doDel(this);">POST delete</button></br>
 <button onclick="doGetDel(this);">GET delete</button></br>
 <button onclick="doDeleteDel(this);">DELETE delete</button>
+
 <script>
 
 function callDB(e){
@@ -241,6 +260,8 @@ xhr.onerror=function(e){alert('fuck');console.log('fuck');};
 xhr.send();
 }
 </script>
+</main>
+</br>
 <footer><% include footer %></footer>
 </body>
 </html>
