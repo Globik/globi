@@ -4,25 +4,14 @@
 <head>
 <% include head %>
 
-<style>
-.wrapper{
 
-display:-webkit-box;
-display:-webkit-flex;
-display:flex;
-
-min-height:100vh;
-flex-direction:column;
-}
-.fuck{flex: 1}
-</style>
 </head>
 <body class="wrapper">
 
 <header class="header">
 <% include header %>
 </header>
-<main class="fuck">
+<main class="main-wr">
 <% if (message) { %>
 <p><%= message %></p>
 <% } %>
