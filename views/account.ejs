@@ -42,8 +42,8 @@ Username: <%= user.username %>
 <button onclick="doDel(this);">POST delete</button></br>
 <textarea id="filedit" style="width:400px;height:400px;" placeholder="file for edit"></textarea>
 
-<button onclick="doGetDel(this);">GET delete</button></br>
-<button onclick="doDeleteDel(this);">DELETE delete</button>
+<button onclick="doGetDel(this);">call footer</button></br>
+<button onclick="saveFile(this);">save footer</button>
 
 <script>
 
@@ -199,6 +199,7 @@ else{ return false;}
 }
 
 //*****
+
 function doDel(event){
 var xhr=new XMLHttpRequest();
 
@@ -231,6 +232,30 @@ document.getElementById('filedit').value=this.response;
 
 xhr.send();
 }
+
+function saveFile(event){
+var errCount=0;
+if(document.getElementById('filedit').value === ''){errCount++}
+
+if(errCount === 0){
+var xhr=new XMLHttpRequest();
+var bodyfile=document.getElementById('filedit').value;
+xhr.open('POST', '/savefile', true);
+xhr.setRequestHeader('Content-type','application/json');
+xhr.onload=function(e){
+if(this.status ==200){
+
+document.getElementById('out').innerHTML=this.response;
+}
+}
+xhr.onerror=function(e){alert('fuck');console.log('fuck');};
+var data={};
+data.savingfile=bodyfile;
+var data=JSON.stringify(data);
+xhr.send(data);}else{alert('Please fill in field');}
+}
+
+
 
 function doDeleteDel(event){
 var xhr=new XMLHttpRequest();

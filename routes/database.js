@@ -70,10 +70,18 @@ console.log('req.body.name :'+req.body.name);
 console.log('req.body :'+ req.body);
 console.log('req.name :'+ req.name);
 console.log('req.etwas :'+req.etwas);
-fs.readFile('./views/header.ejs','utf-8',function(err,data){
-console.log(data);
-res.send('get sapros and req.params.name - OK and '+req.params.name+' data :'+data);
+fs.readFile('./views/footer.ejs','utf-8',function(err,data){
+//console.log(data);
+res.send(data);
 });
+});
+
+router.post('/savefile',function(req,res){
+//console.log('req.body.savingfile :'+req.body.savingfile);
+fs.writeFile('./views/footer.ejs',req.body.savingfile,function(err){
+if(err) throw err;
+console.log('File write completed');});
+res.send('file saved');
 });
 
 router.delete('/delete/:id',function(req,res){
