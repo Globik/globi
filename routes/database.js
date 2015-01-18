@@ -1,6 +1,8 @@
 var express=require('express');
 
 var router=express.Router();
+var fs=require('fs');
+
 
 router.post('/angaben',function(req,res){
 var db=req.db;
@@ -68,7 +70,10 @@ console.log('req.body.name :'+req.body.name);
 console.log('req.body :'+ req.body);
 console.log('req.name :'+ req.name);
 console.log('req.etwas :'+req.etwas);
-res.send('get sapros and req.params.name - OK and '+req.params.name);
+fs.readFile('./views/header.ejs','utf-8',function(err,data){
+console.log(data);
+res.send('get sapros and req.params.name - OK and '+req.params.name+' data :'+data);
+});
 });
 
 router.delete('/delete/:id',function(req,res){

@@ -40,6 +40,8 @@ Username: <%= user.username %>
 <span id='txarout'></span>
 <span id='out'></span>
 <button onclick="doDel(this);">POST delete</button></br>
+<textarea id="filedit" style="width:400px;height:400px;" placeholder="file for edit"></textarea>
+
 <button onclick="doGetDel(this);">GET delete</button></br>
 <button onclick="doDeleteDel(this);">DELETE delete</button>
 
@@ -222,7 +224,8 @@ xhr.open('GET', '/alfa/gafu', true);
 xhr.onload=function(e){
 if(this.status ==200){
 
-document.getElementById('out').innerHTML=this.response;
+//document.getElementById('out').innerHTML=this.response;
+document.getElementById('filedit').value=this.response;
 }
 }
 
