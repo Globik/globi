@@ -82,7 +82,7 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
  //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
 
-var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+  var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 app.use(function(req,res,next){
     req.db = db;

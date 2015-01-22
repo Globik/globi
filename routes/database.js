@@ -70,19 +70,38 @@ console.log('req.body.name :'+req.body.name);
 console.log('req.body :'+ req.body);
 console.log('req.name :'+ req.name);
 console.log('req.etwas :'+req.etwas);
-fs.readFile('./views/footer.ejs','utf-8',function(err,data){
+fs.readFile('./views/'+req.params.name,'utf-8',function(err,data){
 //console.log(data);
 res.send(data);
 });
 });
 
 router.post('/savefile',function(req,res){
-//console.log('req.body.savingfile :'+req.body.savingfile);
-fs.writeFile('./views/footer.ejs',req.body.savingfile,function(err){
+console.log('req.body.savingfile :'+req.body.savingfile+ ' req.body.qwest '+req.body.qwest);
+
+fs.writeFile('./views/'+req.body.qwest,req.body.savingfile,function(err){
 if(err) throw err;
 console.log('File write completed');});
+
 res.send('file saved');
 });
+
+router.get('/fileslist',function(req,res){
+
+fs.readdir('./views/',function(err,files){
+if(err) throw err;
+var d=[];
+files.forEach(function(file){
+d.push(file);
+console.log('./views/'+file);});
+console.log('d.length '+d.length);
+console.log('d '+d);
+res.json(d);});
+
+console.log('');
+//res.send('l');
+});
+
 
 router.delete('/delete/:id',function(req,res){
 var db=req.db;

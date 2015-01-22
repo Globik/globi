@@ -38,10 +38,10 @@ background-color:#444;
 border-radius:4px 4px 0 0;
 }
 
-ul{
+.headerul{
 list-style:none;
 }
-li{
+.headerli{
 display:inline-block;
 float:left;
 padding:10px;
@@ -53,13 +53,11 @@ color:#2262AD;
 <a href="#" id="logo"></a>
 <nav>
 <a href="#" id="menu-icon"></a>
-<ul>
-<li><a href="/" class="current">Home</a></li>
+<ul class="headerul">
+<li class="headerli"><a href="/" class="current">Home</a></li>
 <% if(user) { %>
-<li><a href="/account">Account</a></li>
+<li class="headerli"><a href="/account">Account</a></li>
 <% } %>
-<li><a href="/login">Log in</a> | <a href="/logout">Log out</a></li>
-
-
+<li class="headerli"><a href="/login">Log in</a> | <a href="/logout">Log out</a></li>
 </ul>
 </nav>
