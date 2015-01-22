@@ -1,31 +1,25 @@
 ﻿html,body{
-margin:0;
-padding:0;
-heght:100%;
+margin-left:0;
+padding-left:0;
+
 
 }
 
 body {
-
-/**
-display:table;
-**/
-
 background-color:lightblue;
 font-family:'Open Sans', sans-serif;
 }
 .wrapper{
-
-display:-webkit-box;
-display:-webkit-flex;
 display:flex;
 /**
 align-items:center;
 **/
+
+
 margin:auto;
 min-height:100vh;
 flex-direction:column;
 }
 
-.main-wr{flex: 1;}
+.main-wr{margin:35px;flex: 1;}
 

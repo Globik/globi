@@ -154,9 +154,11 @@ alert("OK, man, I'm about deleting this id of task:"+show);
 vax('DELETE','/delete/'+show,null,onLoad,onError);
 function onLoad(e){out.innerHTML=this.response;}
 var drow=el.parentNode.parentNode.rowIndex;
-    delrow(drow);
+    //delrow(drow);
 function delrow(drow){
-document.getElementById('table').deleteRow(drow);}
+document.getElementById('table').deleteRow(drow);
+}
+delrow(drow);
 }
 else{ return false;}
 }
