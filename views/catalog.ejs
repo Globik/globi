@@ -1,0 +1,21 @@
+<html>
+<head>
+<% include head %>
+
+
+</head>
+<body class="wrapper">
+<header class="header">
+<% include header %>
+</header>
+<main class="main-wr">
+<%= catalog %>:
+<%= result %>
+<h3>List of articles: </h3>
+<ul>
+<% result.forEach(function(d){ %><li><%= d.article %></li><li><%=d.content %></li><li><%= d.autor %></li><li><%= d.dascription %></li><li><%= d.created %></li><li><%= d._id %></li><% });%>
+</ul>
+</main>
+<footer class="footer"><% include footer %></footer>
+</body>
+</html>

@@ -18,6 +18,13 @@ if(err)throw err;
   res.render('index', { drinks:drinks, title: 'Express',user:req.user,resul:result});
 });});
 
+router.get('/catalog',function(req,res){
+var db=req.db;
+db.collection('catalog').find().toArray(function(err,result){
+if(err)throw err;
+res.render('catalog',{catalog:'catalog',user:req.user,result:result});
+});});
+
 router.get('/account', ensureAuthenticated, function(req, res){
   res.render('account', { user: req.user });
 });
