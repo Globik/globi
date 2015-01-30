@@ -70,19 +70,34 @@ console.log('req.body.name :'+req.body.name);
 console.log('req.body :'+ req.body);
 console.log('req.name :'+ req.name);
 console.log('req.etwas :'+req.etwas);
+/***
 fs.readFile('./views/'+req.params.name,'utf-8',function(err,data){
 //console.log(data);
 res.send(data);
 });
+***/
+var stream=fs.createReadStream('./views/'+req.params.name);
+console.log(stream);
+stream.on('data',function(chunk){
+console.log('chunk '+chunk.length);});
+stream.on('end',function(){console.log('end of');});
+//console.log(stream.pipe(res));
+stream.pipe(res);
 });
 
 router.post('/savefile',function(req,res){
 console.log('req.body.savingfile :'+req.body.savingfile+ ' req.body.qwest '+req.body.qwest);
-
+/***
 fs.writeFile('./views/'+req.body.qwest,req.body.savingfile,function(err){
 if(err) throw err;
 console.log('File write completed');});
-
+***/
+var ws=fs.createWriteStream('./views/'+req.body.qwest);
+    ws.write(req.body.savingfile);
+console.log(ws);
+/***
+  ws.on('end',function(){conole.log('Finished fuck Alik fuck!!!!');ws.end();});
+***/
 res.send('file saved');
 });
 

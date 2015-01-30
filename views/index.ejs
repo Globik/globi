@@ -62,7 +62,14 @@ display:inline-block;width:6rem;
 			</p>
 	<h2>Hello, <%= user.username %>.</h2>
 <% } %>
+<p>here must be session's messages.</p>
+<% if (message) { %>
+<p><%= message %></p>
+<% } %>
 
+<% if (session) { %>
+<p><%= session %></p>
+<% } %>
 
 <p><%=title %></p>
 
