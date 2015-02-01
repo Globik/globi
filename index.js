@@ -5,7 +5,7 @@ var passport=require('passport');
 var cookieParser=require('cookie-parser');
 var bodyparser=require('body-parser');
 var met=require('method-override');
-var bcrypt=require('bcrypt');
+//var bcrypt=require('bcrypt');
 var session=require('express-session');
 var SkinStore=require('connect-mongoskin');
 var express = require('express');
@@ -15,15 +15,14 @@ var routes=require('./routes/index');
 var database = require('./routes/database');
 
 var LocalStrategy = require('passport-local').Strategy;
+/***
 var users = [
     { id:1, username: 'Bob', password: 'secret', email: 'bob@example.com' }
   
 ];
-/***
-node index
-, { id: 2, username: 'joe', password: 'birthday', email: 'joe@example.com' }
 ***/
 /***
+
 function findById(id, fn) {
   var idx = id - 1;
   if (users[idx]) {
@@ -43,7 +42,9 @@ function findByUsername(username, fn) {
   return fn(null, null);
 }
 ***/
+
  //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+
 /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
 ***/
@@ -51,7 +52,8 @@ var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/al
 db.collection('users').insert({username:"Bob",email:"ag1@yandex.ru",password:"secret",role:"superadmin"},function(err,result){if(err)throw err;
 if(result) console.log('Aded!');});
 ***/
- var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+ 
+var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***
 passport.serializeUser(function(user, done) {
@@ -101,23 +103,30 @@ passport.use(new LocalStrategy(
         if (!user) { 
 return done(null, false, { message: 'Unknown user ' + username }); }
 
-
+/***
 bcrypt.compare(password, user.password, function(err, res) {
 console.log('Compare to secret: '+res+' password : '+password);
-if(err){throw err;console.log('err');}
-if(res == true) {console.log('User.password: '+user.password);
+if(err){return done(err);
+console.log('err');}
 
+if(res == true) {console.log('User.password: '+user.password);
+***/
 /***
         if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
 ***/
+
+/***
 return done(null, user);} 
 else{return done(null,false,{message:'Invalid password,heh Admin)'});}
 });
-
+***/
+ if (user.password != password) { return done(null, false, { message: 'Invalid password' }); }
+return done(null,user);
 
       });
     });
   }));
+
 /***
 var pass='$2a$10$bKcMJ76efk8ZBYyIJJcGAOXmuM6VZHdSPXSdlXqeUE9ojnE4uvGPC';
 bcrypt.compare('secret',pass, function(err, res) {
