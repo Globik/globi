@@ -258,7 +258,7 @@ var el=document.getElementById('glob');
 </script>
 <style>
 .main {
-    background: #aaa url(images/winterblume.jpg) no-repeat;
+    background: #aaa url() no-repeat;
     width: 800px;
     height: 600px;
     margin: 50px auto;
@@ -316,10 +316,15 @@ a#login_pop:hover, a#join_pop:hover {
     left: 50%;
     opacity: 0;
     padding: 15px;
+
     position: fixed;
     text-align: justify;
     top: 40%;
+height:300px;
+    overflow-y:scroll;
+   min-height:50px;
     visibility: hidden;
+
     z-index: 10;
 
     -webkit-transform: translate(-50%, -50%);
@@ -346,6 +351,27 @@ a#login_pop:hover, a#join_pop:hover {
     -o-transition: opacity .5s, top .5s;
     transition: opacity .5s, top .5s;
 }
+.popup:hover{background-color:lightgray;}
+.popup::-webkit-scrollbar{width:5px;}
+.popup::-webkit-scrollbar:hover{width:5px;background-color:blue;}
+.popup::-webkit-scrollbar-track{
+box-shadow: inset 0 0 6px rgba(255,0,255,0.3);
+border-radius:2px;
+}
+.popup::-webkit-scrollbar-thumb{
+border-radius:2px;
+
+background:rgba(0,255,0,0.8);
+box-shadow:inset 0 0 6px rgba(0,0,0,0.5);
+}
+.popup::-webkit-srcrollbar-thumb:hover{
+visisbility:visible;
+background-color:rgba(24,255,20,0.6);}
+.popup::-webkit-scrollbar-thumb:active{
+background:rgba(255,0,0,0.4);
+}
+
+
 .overlay:target+.popup {
     top: 50%;
     opacity: 1;
@@ -449,7 +475,7 @@ a#login_pop:hover, a#join_pop:hover {
 <div class="popup">
  <span id=indigo class="loading">loading</span>
   <span id="po">popa</span>
-<table id="table">
+<table id="tabl">
 <caption>Caption about Tasks</caption>
 <thead>
 <tr>
@@ -514,6 +540,7 @@ showIndigo('Loading...');
 vax('get','/paramorig',null,onLoad,onError);
 
 function onLoad(e){
+e.stopPropagation();
  showIndigo('');
  po.innerHTML='';
 var data=JSON.parse(this.response);
@@ -527,11 +554,11 @@ if(popa.childNodes[key]){
 }
 ***/
  var str='<input data-numb="'+datid+'" class="btn-edit" type="button" value="save" onclick="addEdik(this)"/>';
-var str2='<input data-numb="'+datid+'" class="btn-del" type="button" value="delete" onclick="deleteTask(this)"/>';
+var str2='<input data-numb="'+datid+'" class="btn-del" type="button" value="delete" onclick="deleteTas(this)"/>';
 //editTx.textContent=data.task[8];
 if(!popa.childNodes[key]){
     popa.innerHTML+='<tr><th contenteditable=true>'
-+data.task[key]+'</th><th>'+data.completed[key]+'</th><th>'+str+'</th><th>'+str2+'</th></tr>';
++data.task[key]+'</th><th>'+data.completed[key]+'<input type="checkbox" data-numb="'+datid+'" onchange="sendDone(this)" value="'+data.completed[key]+'"/></th><th>'+str+'</th><th>'+str2+'</th></tr>';
 }
 
 }
@@ -556,11 +583,44 @@ alert('el.Content :'+su+' _id :'+num_id);
  vax('post','/savedit',data,onLoad,onError);
 function onLoad(e){
  showIndigo('');
-  po.innerHTML+='ok';//this.response;
+  po.innerHTML+='ok'+this.response;
 }
 //setTimeout(callDB,1000);
 //} 
 //else{ alert('Please fill in the field');}
+}
+
+function deleteTas(el){
+
+var show=el.getAttribute('data-numb');
+var confirmation = confirm('Are you sure you want to delete this task?');
+if (confirmation === true) {
+showIndigo('Deleting...');
+alert("OK, man, I'm about deleting this id of task:"+show);
+vax('DELETE','/delete/'+show,null,onLoad,onError);
+function onLoad(e){
+showIndigo('');
+po.innerHTML=this.response;}
+var drow=el.parentNode.parentNode.rowIndex;
+    //delrow(drow);
+function delrow(drow){
+document.getElementById('tabl').deleteRow(drow);
+}
+delrow(drow);
+}
+else{ return false;}
+}
+function sendDone(el){
+alert('aha '+el.value+' | '+el.getAttribute('data-numb'));
+showIndigo('Saving...');
+var data={};
+    data._id=el.getAttribute('data-numb');
+ var data=JSON.stringify(data);   
+vax('post','/savedone',data,onLoad,onError);
+function onLoad(e){
+showIndigo('');
+po.innerHTML=this.response;}
+setTimeout(callB,1000);
 }
 function showIndigo(text){
 var indigo=document.getElementById('indigo');  

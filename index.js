@@ -160,7 +160,7 @@ return done(null, false, { message: 'Unknown user ' + username });
  /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
 ***/
-//var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+ var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

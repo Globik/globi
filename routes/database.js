@@ -44,6 +44,7 @@ db.collection('tasks').updateById(req.body._id,{$set:{task:req.body.name}},funct
 if(err)throw err;
 console.log('You trying update req.body.name: '+req.body.name);
 console.log('req.body._id: '+req.body._id);
+console.log('result :'+result);
 res.send(req.body.name);
 });
 
@@ -52,8 +53,14 @@ res.send(req.body.name);
 //res.send(req.body.name);
 });
 
-
-
+router.post('/savedone',function(req,res){
+var db=req.db;
+db.collection('tasks').updateById(req.body._id,{$set:{completed:true}},function(err,result){
+if(err)throw err;
+console.log('result :'+result);
+console.log('You have completed this task: '+req.body._id);
+res.send('OK '+req.body._id);
+});});
 
 router.post('/delta',function(req,res){
 //db.collection('tasks').removeById(req.body.del,function(err,count){

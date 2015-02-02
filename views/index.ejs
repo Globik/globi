@@ -106,10 +106,11 @@ display:inline-block;width:6rem;
 document.body.onload=gotodb;
 document.getElementById('out').innerHTML="";
 var dov=document.getElementById('rs3');
+var c;
 function gotodb(e){
  
 
-var b="<% resul.forEach(function(d){ %><tr><td><%= d.task %></td><td><%=d.completed %></td><td><% if(user){ %><input name='<%=d._id %>' class='btn-del' type='button' value='X'/><% } %></td></tr><% });%>";
+var b="<% resul.forEach(function(d){var ds=d.completed; %><tr><td><%= d.task %></td><td><% if(ds === true){%>completed <%= d.completed %><%}else{%>shit - uncompleted!<%}%></td><td></td></tr><%});%>"
 
 dov.innerHTML=b;
 
