@@ -156,11 +156,11 @@ return done(null, false, { message: 'Unknown user ' + username });
   }
 ));
 ***/
-// var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+ //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
  /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
 ***/
- var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+ //var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -194,6 +194,9 @@ next();
 app.use('/', routes);
 app.use('/',database);
 
+app.all('*', function(req, res){
+  res.send(404);
+})
 
 /***
 app.get('/', function(req, res) {

@@ -15,7 +15,7 @@ xhr.send(data);
 
 function onLoad(e){
 if(this.status==200){
-console.log(this.response);alert('ok');
+console.log(this.responseText);alert('ok');
 }
 }
 function onError(e){alert('fuck');}
@@ -64,7 +64,12 @@ User.password: <%= user.password %>
 <span id='out4'>test</span>
 <span id='txarout'></span>
 <span id='out'></span>
-<button onclick="doDel(this);">POST delete</button></br>
+<button onclick="doDel(this);">XHR-2-test</button></br>
+<button onclick="fuckdoDel(this);">XHR-POST for IE-9</button></br>
+</br>
+<b>Status for IE-9 xhr: </b>
+</br>
+<span id="iestatus"></span>
 <h3>Like a "file manager" :)</h3>
 </br>
 <button onclick="saveFile(this);">save this file</button>
@@ -72,7 +77,8 @@ User.password: <%= user.password %>
 </br>
 <ul id=outfiles></ul>
 <textarea id="filedit" style="width:400px;height:400px;" placeholder="file for edit"></textarea>
-
+for ie:
+http://127.0.0.1:5000/account
 
 <script>
 var txarout=document.getElementById('txarout');
@@ -89,7 +95,7 @@ vax('get','/paramorig',null,onLoad,onError);
 
 function onLoad(e){
  showIndicator('');
-var data=JSON.parse(this.response);
+var data=JSON.parse(this.responseText);
     taskBody.innerHTML='';
 for( var key in data.task){
 var datid=data._id[key];
@@ -180,7 +186,7 @@ xhr.setRequestHeader('Content-type','application/json');
 xhr.onload=function(e){
 if(this.status ==200){
 
-document.getElementById('out').innerHTML=this.response;
+document.getElementById('out').innerHTML=this.responseText;
 }
 }
 xhr.onerror=function(e){alert('fuck');console.log('fuck');};
@@ -190,6 +196,66 @@ data.name="alik";
 xhr.send(JSON.stringify(data));
 }
 
+function fuckdoDel(){
+//if ($.browser.msie && window.XDomainRequest) 
+    // Use Microsoft XDR
+    var xdr = new XMLHttpRequest();//new XDomainRequest();
+    xdr.open("post", "/delta");
+xdr.setRequestHeader('Content-type','application/json');
+    xdr.onload = function () {
+ alert('xdr.responseText '+xdr.responseText);
+var iestat=document.getElementById('iestatus');
+    iestat.innerHTML=xdr.responseText;
+/***
+    var JSON = $.parseJSON(xdr.responseText);
+    if (JSON == null || typeof (JSON) == 'undefined')
+    {
+        JSON = $.parseJSON(data.firstChild.textContent);
+    }
+    processData(JSON);
+***/
+    };
+
+ xdr.onprogress = function(){ };
+    xdr.ontimeout = function(){ };
+    xdr.onerror = function () {alert('fuck! Fuckin IE-9!'); };
+   var data={};
+    data.name="alik";
+
+    xdr.send(JSON.stringify(data));
+}
+
+
+/***
+****************
+**************
+function fuckdoDel(){
+//if ($.browser.msie && window.XDomainRequest) 
+    // Use Microsoft XDR
+    var xdr = new XDomainRequest();
+    xdr.open("get", "someurl");
+    xdr.onload = function () {
+ alert('xdr.responseText '+xdr.responseText);
+
+    var JSON = $.parseJSON(xdr.responseText);
+    if (JSON == null || typeof (JSON) == 'undefined')
+    {
+        JSON = $.parseJSON(data.firstChild.textContent);
+    }
+    processData(JSON);
+
+    };
+
+ xdr.onprogress = function(){alert('progress'); };
+    xdr.ontimeout = function(){ };
+    xdr.onerror = function () {alert('fuck! Fuckin IE-9!'); };
+   var data={};
+    data.name="alik";
+
+    xdr.send(JSON.stringify(data));
+}
+
+***/
 //*******************************
 //********************************
 //"file manager"
@@ -208,7 +274,7 @@ vax('get','/alfa/'+bube,null,onLoad,onError);
 
 function onLoad(e){
 showIndicator('');
-filedit.value=this.response;}
+filedit.value=this.responseText;}
 }
 
 function saveFile(event){
@@ -227,14 +293,14 @@ var data={};
 else{alert('Please fill in field');}
 }
 
-function onLoad(e){out.innerHTML=this.response;}
+function onLoad(e){out.innerHTML=this.responseText;}
 
 function showFiles(event){
 showIndicator('Loading..');
 vax('get','/fileslist',null,onLoad,onError);
 function onLoad(e){
 showIndicator('');
-var data=JSON.parse(this.response);
+var data=JSON.parse(this.responseText);
 document.getElementById('out').innerHTML=data;
 for(var i=0;i<data.length;i++){
 //alert(data[i]);
@@ -543,7 +609,7 @@ function onLoad(e){
 e.stopPropagation();
  showIndigo('');
  po.innerHTML='';
-var data=JSON.parse(this.response);
+var data=JSON.parse(this.responseText);
     popa.innerHTML='';
 var li=document.createElement('li');
 for( var key in data.task){

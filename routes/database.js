@@ -67,7 +67,7 @@ router.post('/delta',function(req,res){
 //if(err)throw err;
 //console.log("deleted via verv delete :"+req.params.id);
 console.log(req.body.name);
-res.send("OK");
+res.send("OK - for IE-9");
 //});
 });
 

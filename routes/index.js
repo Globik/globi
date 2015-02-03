@@ -48,6 +48,32 @@ if(err)throw err;
 res.render('catalog',{catalog:'catalog',user:req.user,result:result});
 });});
 
+router.get('/catalog/:id', function(req, res) {
+console.log('req.params.id :'+req.params.id);
+var db=req.db;
+    db.collection('catalog').findById(req.params.id, function(err, article){ 
+if(err) return next(err);
+
+//console.log('article :'+article._id);
+
+ res.render('article_view',{user:req.user,article:article});
+
+});});
+
+router.post('/saveArticle',function(req,res){
+ var db=req.db;
+
+db.collection('catalog').updateById(req.body._id,{$set:{article:req.body.article,content:req.body.cont,dascription:req.body.artBody,redaktiert:new Date()}},function(err,result){
+if(err)throw err;
+console.log('result :'+result);
+console.log('visible :');
+
+console.log('You have edeted this article id: '+req.body._id);
+console.log('req.body.artBody :'+req.body.artBody);
+res.send('OK - saved! '+req.body._id);
+});
+});
+
 router.get('/account', ensureAuthenticated, function(req, res){
 
   res.render('account', { user: req.user,message:req.flash('message') });
