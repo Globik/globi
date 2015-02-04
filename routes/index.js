@@ -48,16 +48,20 @@ if(err)throw err;
 res.render('catalog',{catalog:'catalog',user:req.user,result:result});
 });});
 
+router.get('/error',function(req,res){
+res.render('error',{user:req.user});});
+
 router.get('/catalog/:id', function(req, res) {
 console.log('req.params.id :'+req.params.id);
 var db=req.db;
     db.collection('catalog').findById(req.params.id, function(err, article){ 
 if(err) return next(err);
+if(article !== null){
+console.log('article :'+article)
+//console.log('article._id :'+article._id);
 
-//console.log('article :'+article._id);
-
- res.render('article_view',{user:req.user,article:article});
-
+ res.render('article_view',{user:req.user,article:article});}
+else {res.redirect('/error');}
 });});
 
 router.post('/saveArticle',function(req,res){

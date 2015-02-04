@@ -23,6 +23,7 @@ function onError(e){alert('fuck');}
 <% include header %>
 </header>
 <main class="main-wr">
+<% if(article !== null){%>
 <ul>
 <li>
 <%=article._id %>
@@ -51,6 +52,8 @@ function onError(e){alert('fuck');}
 <li><b>Created:</b>
 <%= article.created %>
 </li>
+<ul>
+<%}%>
 </br>
 <% if(user){%>
 <span id=indigo class="loading" style="background-color:blue;"></span>

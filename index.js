@@ -53,7 +53,7 @@ db.collection('users').insert({username:"Bob",email:"ag1@yandex.ru",password:"se
 if(result) console.log('Aded!');});
 ***/
  
-var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+ var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***
 passport.serializeUser(function(user, done) {
