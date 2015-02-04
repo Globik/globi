@@ -38,7 +38,7 @@ if(err)throw err;
 
 router.get('/catalog',function(req,res){
 var db=req.db;
-req.session.items="Warenhouse";
+req.session.items=new Date();
 req.cookies.number=2000;
 //console.log('req.session.items : '+req.session.items);
 //req.flash('kiu');
