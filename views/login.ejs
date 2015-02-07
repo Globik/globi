@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<% include head %>
+<%- include head %>
 
 
 </head>
@@ -11,7 +11,7 @@
 <header class="header">
 <% include header %>
 </header>
-<main class="main-wr">
+<div class="main-wr">
 <% if (message) { %>
 <p><%= message %></p>
 <% } %>
@@ -36,7 +36,7 @@
 	</div>
 </form><p><small>nt - b:s</small></p></fieldset>
 
-</main>
+</div>
 
 <footer class="footer"><% include footer %></footer>
 

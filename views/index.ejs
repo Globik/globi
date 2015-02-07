@@ -44,7 +44,7 @@ display:inline-block;width:6rem;
 <header class="haupt-header">
 <% include header %>
 </header>
-<main class="main-wr">
+<div class="main-wr">
 <h1>The Test</h1>
 
 
@@ -161,7 +161,15 @@ document.getElementById('myt').deleteRow(drow);
 
 
 </br>
-</main>
+<!--[if IE 9]>
+<table id="myt">
+<thead><tr><th>tasks</th><th>status</th><th>delete</th></tr></thead>
+<tbody id="rs3">
+<% resul.forEach(function(d){var ds=d.completed; %><tr><td><%= d.task %></td><td><% if(ds === true){%>completed <%= d.completed %><%}else{%>shit - uncompleted!<%}%></td><td></td></tr><%});%>
+</tbody>
+</table>
+<![endif]-->
+</div>
 
 <footer><% include footer %></footer>
 

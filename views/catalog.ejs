@@ -1,35 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<style>
-body,html{
-margin:0;
-padding:0;
-height:100%;
-background-color:lightblue;
-}
-
-*html #market{
-height:100%;
-}
-
-#market{
-/*border:solid 3px black;*/
-width:100%;
-
-margin:0 auto;
-
-min-height:100%;
-}
-</style>
+<%- include head %>
 </head>
 <body class="wrapper">
-<div id="market">
+
 <header>
 <%- include header %>
 </header>
-
+<div class="main-wr"
 
 <%= catalog %> :
 <%= result %>
@@ -44,23 +23,10 @@ min-height:100%;
 </div>
 
 
-<style>
-footer{
-font:bold 1.2em/2.5 arial;
-/*
-display:table-row;
-*/
-background-color:green;
-position:relative;
-width:100%;
-height:60px;
-text-align:center;
-margin-top:-77px;
-}
-</style>
+
 
 <footer>
-Hosted by Al <a href="https://heroku.com">heroku.com</a>
+<%- include footer %>
 </footer>
 </body>
 </html>

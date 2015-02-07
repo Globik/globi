@@ -2,29 +2,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<style>
-body,html{
-margin:0;
-padding:0;
-height:100%;
-}
 
-#maket{
-/*border:solid 3px black;*/
-width:100%;
-/*
-margin:0 auto;
-*/
-min-height:100%;
-}
-</style>
+
+<%- include head %>
 </head>
 <body class="wrapper">
-<div id="maket">
 <header><% include header %></header>
-<main class="main-wr">
+<div class="main-wr">
 <b>Error 404?</b> No such file or directory!
-</main>
+mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+
+kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+<button onclick="hidePic(this)">Hide pic</button>
+<img id=pic src="/images/picch.jpg" style="width:80%;"/>
+<script>
+function hidePic(el){
+pic.style.display="none";
+el.innerHTML="fertig!";
+}
+</script>
 </div>
 <footer><% include footer %></footer>
 </body>
