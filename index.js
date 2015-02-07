@@ -46,7 +46,7 @@ function findByUsername(username, fn) {
 }
 ***/
 
- var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+ //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
 
 /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");
@@ -56,7 +56,7 @@ db.collection('users').insert({username:"Bob",email:"ag1@yandex.ru",password:"se
 if(result) console.log('Aded!');});
 ***/
  
- //var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
+ var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 
 /***
 passport.serializeUser(function(user, done) {
