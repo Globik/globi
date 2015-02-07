@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <% include head %>
 <script>
@@ -19,6 +20,7 @@ console.log(this.responseText);alert('ok');
 function onError(e){alert('fuck');}
 </script></head>
 <body class="wrapper">
+<div id="maket">
 <header>
 <% include header %>
 </header>
@@ -76,9 +78,9 @@ function onError(e){alert('fuck');}
 <span id="out"></span>
 <style>
 .main {
-    background: #aaa url('/images/pic.png') no-repeat;
-    width: 800px;
-    height: 600px;
+    position:relative;padding:40px;display:block;
+    width: 200px;
+    height: 60px;
     margin: 50px auto;
 }
 .panel {
@@ -94,12 +96,9 @@ function onError(e){alert('fuck');}
     margin-right: 10px;
     padding: 5px 10px;
     text-decoration: none;
-    text-shadow: 1px 1px #000;
+    text-shadow: 1px 1px #010;
 
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
+    
     border-radius: 10px;
 }
 a#login_pop:hover, a#join_pop:hover {
@@ -116,11 +115,6 @@ a#login_pop:hover, a#join_pop:hover {
     top: 0;
     visibility: hidden;
     z-index: 1;
-
-    -webkit-transition: opacity .5s;
-    -moz-transition: opacity .5s;
-    -ms-transition: opacity .5s;
-    -o-transition: opacity .5s;
     transition: opacity .5s;
 }
 .overlay:target {
@@ -292,8 +286,8 @@ background:rgba(255,0,0,0.4);
 <a href="#x" class="overlay" id="join_form"></a>
         
 <div class="popup">
-  <span id=indigo class="loading">loading</span>
-  <span id="po">popa</span>
+  <span id="fuckout" style="background-color:red;"></span>
+  <span id="po" class="loading"></span>
      <h2>Text editor</h2>
 </br><button onclick="saveArticle(this)">saveArticle</button></br>
 <textarea id="articleContent" style="width:400px;height:400px;" value="For edit"></textarea>
@@ -360,11 +354,12 @@ function callRedactor(){
 //alert('ok');
 articleContent.value=divContent.innerHTML;
 }
-
+showIndigo('');
 function saveArticle(e){
 var errCount=0;
 if(articleContent.value === ''){errCount++}
 if(errCount === 0){
+showIndigo('Saving now...');
 var data={};
  out.textContent=articleContent.value;
 
@@ -380,7 +375,7 @@ var numb=divContent.getAttribute('data-id');
   vax('post','/saveArticle',data,onLoad,onError);
 
   function onLoad(e){
-  out.innerHTML=this.responseText;
+  showIndigo('');
   po.innerHTML=this.responseText;
   }
 //setTimeout(callDB,1000);
@@ -397,10 +392,10 @@ status.innerHTML="Contenteditable enabled!";
   setEditable('divDescription',true);
 el.innerHTML="go edit!";
 }
-showIndigo("");
+showT("");
 
 function saveQuickEdit(el){
-showIndigo("Saving....");
+showT("Saving....");
 var numb=divContent.getAttribute('data-id');
 //alert(divContent.innerHTML);
 //alert('data-id :'+numb);
@@ -413,8 +408,8 @@ var data={};
  var data=JSON.stringify(data);
  vax('post','/saveArticle',data,onLoad,onError);
 function onLoad(e){
-showIndigo('');
-el.innerHTML="saved!";
+showT('');
+//el.innerHTML="saved!";
 }
   setEditable('divHeader',false);
   setEditable('divDescription',false);
@@ -432,11 +427,22 @@ alert(el.getAttribute('data-vis'));
 }
 
 function showIndigo(text){
-var indigo=document.getElementById('indigo');  
-    indigo.innerHTML=text;}
+//var indigo=document.getElementById('indigo'); 
+
+   //po.innerHTML=text;
+ getId('fuckout').innerHTML=text;
+ 
+}
+function showT(text){
+getId('indigo').innerHTML=text;
+}
+
+function getId(id){  return document.getElementById(id);}
+
 </script>
 <%}%>
 </main>
+</div>
 <footer><% include footer %></footer>
 </body>
 </html>

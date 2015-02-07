@@ -8,6 +8,9 @@ var met=require('method-override');
 //var bcrypt=require('bcrypt');
 var session=require('express-session');
 var SkinStore=require('connect-mongoskin');
+
+//var d=require("ejs").compile('header');
+
 var express = require('express');
 var app = express();
 
@@ -177,7 +180,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
  
-  
+ //var se=new EJS({url:"header.ejs"}).update(); 
 
   //var db=require('mongoskin').db(process.env.MONGOHQ_URL,{w:1});
 

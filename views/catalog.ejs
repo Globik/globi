@@ -1,14 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<% include head %>
 
+<style>
+body,html{
+margin:0;
+padding:0;
+height:100%;
+background-color:lightblue;
+}
 
+*html #market{
+height:100%;
+}
+
+#market{
+/*border:solid 3px black;*/
+width:100%;
+
+margin:0 auto;
+
+min-height:100%;
+}
+</style>
 </head>
 <body class="wrapper">
-<header class="header">
-<% include header %>
+<div id="market">
+<header>
+<%- include header %>
 </header>
-<main class="main-wr">
+
+
 <%= catalog %> :
 <%= result %>
 <h3>List of articles: </h3>
@@ -16,7 +38,29 @@
 <% result.forEach(function(d){ %><li><a href='/catalog/<%= d._id %>' id=<%= d._id %> ><%= d.article %></a></li><li><%=d.content %></li><li><%= d.autor %></li><li><%= d.dascription %></li><li><%= d.created %></li><li><%= d._id %></li><a href='/catalog/<%= d._id %>' >Read more...</a><% });%>
 
 </ul>
-</main>
-<footer class="footer"><% include footer %></footer>
+<!--[if IE 9]>
+<p>Halihalo IE 9</p>
+<![endif]-->
+</div>
+
+
+<style>
+footer{
+font:bold 1.2em/2.5 arial;
+/*
+display:table-row;
+*/
+background-color:green;
+position:relative;
+width:100%;
+height:60px;
+text-align:center;
+margin-top:-77px;
+}
+</style>
+
+<footer>
+Hosted by Al <a href="https://heroku.com">heroku.com</a>
+</footer>
 </body>
 </html>
