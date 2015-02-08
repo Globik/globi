@@ -99,6 +99,9 @@ router.get('/logout', function(req, res){
   req.logout();
   res.redirect('/');
 });
+router.get('/variant-2',function(req,res){
+res.render('variant-2');
+});
 
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
