@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>flexbox</title>
+<meta content="width=device-width,initial-scale=1" name="viewport" />
+<meta charset="utf-8" />
+<meta name="description" content="Simple site on express.js">
+<meta name="author" content="globibot on heroku.com">
+<link rel="shortcut icon" type="image/ico" href="http://frontender.info/favicon.ico">
+<style>
+.wrapper {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;  
+  
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+  
+  font-weight: bold;
+  text-align: center;
+}
+
+.wrapper > * {
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.header {
+  background: tomato;
+}
+
+.footer {
+  background: lightgreen;
+}
+
+.main {
+  text-align: left;
+  background: deepskyblue;
+}
+
+.aside-1 {
+  background: gold;
+}
+
+.aside-2 {
+  background: hotpink;
+}
+
+@media all and (min-width: 600px) {
+  .aside { flex: 1 auto; }
+}
+
+@media all and (min-width: 800px) {
+  .main    { flex: 3 0px; }
+  .aside-1 { order: 1; } 
+  .main    { order: 2; }
+  .aside-2 { order: 3; }
+  .footer  { order: 4; }
+}
+
+body {
+  padding: 2em; 
+}
+
+</style>
+
+</head>
+<body>
+<div class="wrapper">
+  <header class="header">Header</header>
+  <article class="main">
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+<p>
+The best solution I've seen uses a separate pre element absolutely positioned off screen, styled the same as the textarea; let's call this the mirror element. Using setTimeout, the textarea is then polled every 200ms or so, and each time a new value is found, the content of the mirror element is updated. This then automatically sizes to fit its content (as a normal block-level element does), after which you can extract the size from the offsetHeight property and apply that back to the textarea.
+
+This method works, but the polling is inefficient, especially if you have multiple text areas. Worse, if you support flexible-width text areas you must check that the width of the textarea hasn't changed on each poll as well (an expensive read to offsetWidth). It can be tricky to calculate the exact width of the content-box in the textarea; hence there's normally a "fudge factor" added to the height applied to the textarea, just to make sure it's not slightly too short, resulting in a box that's then slightly too big for the content. Here, I'm going to show you a better solution to the problem, which sizes the textarea  using only the smallest snippet of JavaScript magic along with some cunning CSS.
+
+The technique is an improvement on the offscreen-positioned mirror element. The first improvement we make is related to how we detect input. The change event is not ideal as it only fires when the textarea loses focus. The keyup event works most of the time, but also fires on events where no real change has been made, such as moving the cursor ... Bla bla bla ....
+</p>  
+  </article>
+  <aside class="aside aside-1"><ul><li><a href="/">home</a></li><li><a href="/variant-2">variant-2</a></li><li><a href="/catalog">catalog</a></li></ul></aside>
+  <aside class="aside aside-2">Aside 2</aside>
+  <footer class="footer">Footer</footer>
+</div>
+</body>
+</html>

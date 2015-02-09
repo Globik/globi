@@ -46,7 +46,7 @@ function findByUsername(username, fn) {
 }
 ***/
 
-// var db=require('mongoskin').db("mongodb://localhost:27017/todo");
+ //var db=require('mongoskin').db("mongodb://localhost:27017/todo");
 
 /***
 var db=require('mongoskin').db("mongodb://alik:123456@dogen.mongohq.com:10004/alikon-fantastic-database");

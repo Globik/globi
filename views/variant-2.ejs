@@ -85,7 +85,7 @@ header styles
 	position: absolute;
 	left: 0;
 	top: 5px;
-	width: 645px;
+	width: 50%;
 	text-align: right;
 }
 
@@ -167,7 +167,7 @@ contents styles
 #contents
 { 
 	float: left;
-	width: 630px;/*430px*/
+	width: 80%;/*430px*/
 	margin: 0 0 0 20px;
 /*height:100%;*/
 /*min-height:auto;*/
@@ -395,7 +395,7 @@ background:rgba(255,0,0,0.4);
 		<ul>
 			<li><a href="/">home</a></li>
 			<li><a href="/catalog">catalog</a></li>
-			<li><a href="#">Section 3</a></li>
+			<li><a href="/variant-3">variant-3</a></li>
 			<li><a href="#">Section 4</a></li>
 		</ul>
 	</div>
@@ -431,44 +431,16 @@ background:rgba(255,0,0,0.4);
 <img class="imagefloat" src="/images/pic.png">
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent</p>
 <p>
-nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
-mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-mmmmmmmmmmm
-mmmmmmm.
-kkkkkkkk llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
-llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjllllllllllllllllllllllllllllllllllllllllllllllllllll
-hddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddd
-ddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeelll
-mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-mmmmmm
-mmmmmmm
-mmmmmmmmm
-3
-</p>
+
+For IE8 we can use the proprietary onpropertychange event, which also fires whenever the value property changes. This event is also available on versions less than 8, but a few small CSS tweaks will probably be needed to make the expanding text area work overall; I leave making it work in IE6 or IE7 as an exercise to the readers unlucky enough to have to support those ancient browsers.
+
+Now, some of you may have spotted that, as we’re no longer polling, the textarea won’t resize if it has a fluid width and the window is resized. That brings us to our next improvement: we’re going to make the browser resize the textarea automatically. But, I hear you cry, I thought you said this was impossible? Well, not quite. You can’t do it automatically with just HTML and CSS, but all the JS needs to do is update the mirror element with the value of the textarea. It doesn’t have to measure or explicitly set height. The trick is to position the textarea on top of the mirror element, both inside a relatively-positioned containing div. The textarea is positioned absolutely and given a width and height of 100% to make it fill the div. The mirror is positioned statically so it will expand to fit its contents. The containing div will then expand to fit the height of 
 <p>
-nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
-mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-mmmmmmmmmmm
-mmmmmmm.
-kkkkkkkk llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll
-llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllljjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjllllllllllllllllllllllllllllllllllllllllllllllllllll
-hddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddd
-dddddddddddddddddddddddddddddddddddddddddddddddddddddd
-ddddddddddddddddddddddddddddddddddddddeeeeeeeeeeeeeeeeee
-eeeeeeeeeeeeeeeeeeeeeeeeeeeelll
-mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
-mmmmmm
-mmmmmmm
-mmmmmmmmm
-3
+Example....
 </p>
 
 			
-	<ul><li><a href="#join_form" id="join_pop">Edite</a></li>
+	<ul><li><a href="#join_form" id="join_pop">Edit</a></li>
 				<li><a href="#">Comments (4)</a></li>
 				<li><a href="#">Pingbacks (1)</a></li>
 				<li>Category: <a href="#" title="Category">CSS</a></li>
@@ -493,7 +465,7 @@ mmmmmmmmm
   <span id="po" class="loading"></span>
      <h2>Text editor</h2>
 </br><button onclick="saveArticle(this)">saveArticle</button></br>
-<textarea id="articleContent" oninput="saveArticle(this)" style="width:400px;height:400px;" value="For edit"></textarea>
+<textarea id="articleContent" oninput="saveArticle(this)" rows="5" cols="54"  wrap="pysical" value="For edit"></textarea>
 </br>
 <button onclick="saveArticle(this)">saveArticle</button>   
 <h2>Sign Up</h2>
@@ -516,6 +488,7 @@ join_pop.onclick=callRedactor;
 
 function callRedactor(){
 //alert('ok');
+divContent.setAttribute('contenteditable',true);
 articleContent.value=divContent.innerHTML;
 //divContent.inner
 }
@@ -530,6 +503,7 @@ if(errCount === 0){
 //var data={};
  //out.textContent=articleContent.value;
  divContent.innerHTML=articleContent.value;
+ divContent.setAttribute('contenteditable',false);
 //alert('out.textContent :'+out.textContent);
 //var numb=divContent.getAttribute('data-id');
 //alert('data-id : '+numb);
@@ -550,6 +524,29 @@ if(errCount === 0){
 } else
 { alert('Please fill in the field');}
 }
+
+articleContent.onkeydown=function(e){
+if(e.keyCode == 13){
+//alert('l');
+insertMetachars('<br>','');
+ 
+}
+}
+
+function insertMetachars(sStartTag, sEndTag) {
+var bDouble = arguments.length > 1, 
+oMsgInput = area;
+
+
+var nSelStart = oMsgInput.selectionStart, 
+nSelEnd = oMsgInput.selectionEnd, sOldText = oMsgInput.value;
+oMsgInput.value = sOldText.substring(0, nSelStart) + (bDouble ? sStartTag + sOldText.substring(nSelStart, nSelEnd) + sEndTag : sStartTag) + sOldText.substring(nSelEnd);
+oMsgInput.setSelectionRange(bDouble || nSelStart === nSelEnd ? nSelStart + sStartTag.length : nSelStart, (bDouble ? nSelEnd : nSelStart) + sStartTag.length);
+oMsgInput.focus();
+
+
+}
+
 
 //function(e){
 //divContent.innerHTML=articleContent.value;
