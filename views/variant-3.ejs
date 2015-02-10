@@ -389,6 +389,7 @@ smaller than 650
 		padding: 3% 4%;
 		margin: 0 0 10px;
 	}
+#cnv{background-color:green;width:300px;height:150px;
 
 	/* embedded videos */
 	.video embed,
@@ -491,9 +492,9 @@ function resp(){
 var cnv=document.getElementById('cnv');
 var height=window.innerHeight;
 var width=window.innerWidth;
- cnv.width = cnv.width * (cnv.width/width);
-  cnv.height=cnv.height*(cnv.height/height);
-out5.innerHTML="canvas width :"+cnv.width;
+ //cnv.width = width;
+ //cnv.height= height;
+out5.innerHTML="orientation event";
 
 var s1='width :'+width+' height : '+height;
 //var c=cnv.getContext('2d');
