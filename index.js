@@ -9,7 +9,7 @@ var met=require('method-override');
 var session=require('express-session');
 var SkinStore=require('connect-mongoskin');
 
-//var d=require("ejs").compile('header');
+
 
 var express = require('express');
 var app = express();

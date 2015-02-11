@@ -4,17 +4,16 @@
 <head>
 
 
-<%- include head %>
+<%- include includes/head %>
 </head>
-<body class="wrapper">
-<header><% include header %></header>
-<div class="main-wr">
+<body>
+<div id="pagewrap">
+<header id="header"><% include includes/header %></header>
+<div id="content">
 <b>Error 404?</b> No such file or directory!
-mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
 
-kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
 <button onclick="hidePic(this)">Hide pic</button>
-<img id=pic src="/images/picch.jpg" style="width:80%;"/>
+<img id=pic src="/images/picch.jpg" style="width:40%;"/>
 <script>
 function hidePic(el){
 pic.style.display="none";
@@ -22,6 +21,7 @@ el.innerHTML="fertig!";
 }
 </script>
 </div>
-<footer><% include footer %></footer>
+<footer id="footer"><% include includes/footer %></footer>
+</div>
 </body>
 </html>

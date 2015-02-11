@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<% include head %>
+<% include includes/head %>
 <script>
 function vax(meth,url,data,onLoad,onError){
 var xhr=new XMLHttpRequest();
@@ -18,28 +18,47 @@ console.log(this.responseText);alert('ok');
 }
 }
 function onError(e){alert('fuck');}
-</script></head>
-<body class="wrapper">
-<div id="maket">
-<header>
-<% include header %>
+</script>
+</head>
+
+<body>
+
+<div id="pagewrap">
+<header id="header">
+<% include includes/header %>
 </header>
-<main class="main-wr">
+<div id="content">
 <a href='/variant-2'>variant-2</a>
+<article id="artC" class="post clearfix" data-id="<%= article._id %>" >
+
+<header>
+<h1 class="post-title"><a href="#"><%= article.article %></a></h1>
+<p class="post-meta">
+<time class="post-date" datetime="2011-05-08" pubdate><%= article.created %></time> <em>in</em> 
+<a href="#">Category</a></p>
+</header>
+
+<figure class="post-image"> 
+<img src="/images/pic.png" /> 
+</figure>
+<p>Bla bla bla</p>
+<p>Paragraph</p>
+<div id="divContent" data-id="<%= article._id %>"><%- article.dascription %>
+</div>
+</article>
+
+
+
+
+
 <% if(article !== null){%>
 <ul>
-<li>
-<%=article._id %>
-</li>
-<li><b>Name of article:</b> <div id="divHeader" contenteditable=false>
-<%= article.article %></div>
 
-</li>
 <li>
 <b>By:</b> <%= article.autor %>
 </li>
 <li><b>Quick description:</b>
-<div id="divDescription" contenteditable=false><%= article.content %></div>
+<div id="di" contenteditable=false><%= article.content %></div>
 </li>
 <li>
 <b>Edited:</b> <%= article.redaktiert %>
@@ -47,16 +66,14 @@ function onError(e){alert('fuck');}
 <li><% if(user){%>
 <b>Visibility:</b> <%= article.visible %><input id="checkvis" type="checkbox" data-vis="<%= article.visible %>" onchange="doUnvisible(this)"><%}%>
 </li>
-<li><b>Content:</b> 
-<%= article.dascription %>
-</br><b>Content:</b>
-<div id="divContent"  data-id="<%= article._id %>" style="background-color:lightgray;" contenteditable=false><%- article.dascription %></div>
-</li>
+
 <li><b>Created:</b>
 <%= article.created %>
 </li>
 <ul>
 <%}%>
+
+
 </br>
 <% if(user){%>
 <span id=indigo class="loading" style="background-color:blue;"></span>
@@ -73,9 +90,6 @@ function onError(e){alert('fuck');}
 
 <% if(user){%>
 
-***************
-*****************************
-*****************************
 <span id="out"></span>
 <style>
 .main {
@@ -242,43 +256,30 @@ background:rgba(255,0,0,0.4);
 </style>
 
 <div class="main">
+
 <div class="panel">
-                
 <a href="#login_form" id="login_pop">Log In</a>
-                
 <a href="#join_form" id="join_pop">Change</a>
-           
- </div>
+</div>
 
 <a href="#x" class="overlay" id="login_form"></a>
         
 <div class="popup">
-            
+
 <h2>Welcome Guest!</h2>
-            
 <p>Please enter your login and password here</p>
             
 <div>
-                
 <label for="login">Login</label>
-                
 <input type="text" id="login" value="">
-            
 </div>
             
 <div>
-                
 <label for="password">Password</label>
-                
 <input type="password" id="password" value="">
-            
 </div>
-            
 <input type="button" value="Log In">
-
-            
 <a class="close" href="#"></a>
-        
 </div>
 
         
@@ -287,57 +288,43 @@ background:rgba(255,0,0,0.4);
 <a href="#x" class="overlay" id="join_form"></a>
         
 <div class="popup">
-  <span id="fuckout" style="background-color:red;"></span>
-  <span id="po" class="loading"></span>
-     <h2>Text editor</h2>
+
+<span id="fuckout" style="background-color:red;"></span>
+<span id="po" class="loading"></span>
+<h2>Text editor</h2>
 </br><button onclick="saveArticle(this)">saveArticle</button></br>
 <textarea id="articleContent" style="width:400px;height:400px;" value="For edit"></textarea>
 </br>
 <button onclick="saveArticle(this)">saveArticle</button>   
 <h2>Sign Up</h2>
-            
 <p>Please enter your details here</p>
             
 <div>
-                
 <label for="email">Login (Email)</label>
-                
 <input type="text" id="email" value="">
-            
 </div>
             
 <div>
-                
 <label for="pass">Password</label>
-                
 <input type="password" id="pass" value="">
-            
 </div>
             
 <div>
-                
 <label for="firstname">First name</label>
-                
 <input type="text" id="firstname" value="">
-            
 </div>
     
 <div>
-                
 <label for="lastname">Last name</label>
-        
 <input type="text" id="lastname" value="">
-            
 </div>
         
 <input type="button" value="Sign Up">&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;
 <a href="#login_form" id="login_pop">Log In</a>
-
-            
 <a class="close" href="#"></a>
-        
 </div>
- 
+</div>
+
 <script>
 var join_pop=document.getElementById('join_pop');
 
@@ -356,6 +343,7 @@ function callRedactor(){
 articleContent.value=divContent.innerHTML;
 }
 showIndigo('');
+
 function saveArticle(e){
 var errCount=0;
 if(articleContent.value === ''){errCount++}
@@ -368,12 +356,12 @@ var data={};
 var numb=divContent.getAttribute('data-id');
 //alert('data-id : '+numb);
   data._id=numb;
-  data.article=divHeader.innerHTML;
-  data.cont=divDescription.innerHTML;
+  //data.article=divHeader.innerHTML;
+  //data.cont=divDescription.innerHTML;
     //data.artBody=divContent.innerHTML;
   data.artBody=out.textContent;
   var data=JSON.stringify(data);
-  vax('post','/saveArticle',data,onLoad,onError);
+  vax('post','/updateArticle',data,onLoad,onError);
 
   function onLoad(e){
   showIndigo('');
@@ -389,8 +377,8 @@ function quickRedact(el){
 status.innerHTML="Contenteditable enabled!";
 //divContent.setAttribute('contenteditable',true);
   setEditable('divContent',true);
-  setEditable('divHeader',true);
-  setEditable('divDescription',true);
+  //setEditable('divHeader',true);
+  //setEditable('divDescription',true);
 el.innerHTML="go edit!";
 }
 showT("");
@@ -403,21 +391,22 @@ var numb=divContent.getAttribute('data-id');
   status.innerHTML=numb+' | '+divContent.innerHTML;
 var data={};
     data._id=numb;
-    data.article=divHeader.innerHTML;
-    data.cont=divDescription.innerHTML;
+    //data.article=divHeader.innerHTML;
+    //data.cont=divDescription.innerHTML;
     data.artBody=divContent.innerHTML;
  var data=JSON.stringify(data);
- vax('post','/saveArticle',data,onLoad,onError);
+ vax('post','/updateArticle',data,onLoad,onError);
 function onLoad(e){
 showT('');
-//el.innerHTML="saved!";
+el.innerHTML="saved";
 }
-  setEditable('divHeader',false);
-  setEditable('divDescription',false);
+  //setEditable('divHeader',false);
+  //setEditable('divDescription',false);
   setEditable('divContent',false);
   
 //divContent.setAttribute('contenteditable',false);
 }
+
 
 function setEditable(id, bool){
 document.getElementById(id).setAttribute('contenteditable', bool);
@@ -442,8 +431,12 @@ function getId(id){  return document.getElementById(id);}
 
 </script>
 <%}%>
-</main>
+
 </div>
-<footer><% include footer %></footer>
+<aside id="sidebar">
+<% include includes/aside %>
+</aside>
+<footer id="footer"><% include includes/footer %></footer>
+</div>
 </body>
 </html>

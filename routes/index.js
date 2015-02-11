@@ -78,6 +78,20 @@ res.send('OK - saved! '+req.body._id);
 });
 });
 
+router.post('/updateArticle',function(req,res){
+ var db=req.db;
+
+db.collection('catalog').updateById(req.body._id,{$set:{dascription:req.body.artBody,redaktiert:new Date()}},function(err,result){
+if(err)throw err;
+console.log('result :'+result);
+console.log('visible :');
+
+console.log('You have edeted this article id: '+req.body._id);
+console.log('req.body.artBody :'+req.body.artBody);
+res.send('OK - saved! '+req.body._id);
+});
+});
+
 router.get('/account', ensureAuthenticated, function(req, res){
 
   res.render('account', { user: req.user,message:req.flash('message') });
@@ -100,10 +114,10 @@ router.get('/logout', function(req, res){
   res.redirect('/');
 });
 router.get('/variant-2',function(req,res){
-res.render('variant-2');
+res.render('variant-2',{user:req.user});
 });
 router.get('/variant-3',function(req,res){
-res.render('variant-3');
+res.render('variant-3',{user:req.user});
 });
 
 function ensureAuthenticated(req, res, next) {

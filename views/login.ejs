@@ -2,16 +2,16 @@
 <html lang="en">
 
 <head>
-<%- include head %>
+<%- include includes/head %>
 
 
 </head>
-<body class="wrapper">
-
-<header class="header">
-<% include header %>
+<body>
+<div id="pagewrap">
+<header id="header">
+<% include includes/header %>
 </header>
-<div class="main-wr">
+<div id="content">
 <% if (message) { %>
 <p><%= message %></p>
 <% } %>
@@ -38,7 +38,7 @@
 
 </div>
 
-<footer class="footer"><% include footer %></footer>
-
+<footer id="footer"><% include includes/footer %></footer>
+</div>
 </body>
 </html>

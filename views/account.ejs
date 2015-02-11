@@ -3,7 +3,7 @@
 
 <head>
 
-<% include head %>
+<% include includes/head %>
 
 <script>
 function vax(meth,url,data,onLoad,onError){
@@ -23,10 +23,11 @@ console.log(this.responseText);alert('ok');
 function onError(e){alert('fuck');}
 </script>
 </head>
-<body class="wrapper">
+<body>
+<div id="pagewrap">
 
-<header> <% include header %></header>
-<main class="main-wr">
+<header id="header"> <% include includes/header %></header>
+<div id="content">
 
 <p><a href='/'>home</a> | <a href='/logout'>logout</a></p>
 
@@ -59,6 +60,7 @@ User.password: <%= user.password %>
 </tbody>
 </table>
 </div>
+<p>
 <button id=bu onclick="callDB(this)">callDB</button>
 </br>
 <textarea id="edittex" name="non-name" placeholder="edit this" ></textarea>
@@ -69,6 +71,7 @@ User.password: <%= user.password %>
 <span id='out'></span>
 <button onclick="doDel(this);">XHR-2-test</button></br>
 <button onclick="fuckdoDel(this);">XHR-POST for IE-9</button></br>
+</p>
 </br>
 <b>Status for IE-9 xhr: </b>
 </br>
@@ -328,8 +331,8 @@ var el=document.getElementById('glob');
 <style>
 .main {
     background: #aaa url() no-repeat;
-    width: 800px;
-    height: 600px;
+    width: 200px;
+    height: 100px;
     margin: 50px auto;
 }
 .panel {
@@ -695,8 +698,9 @@ function showIndigo(text){
 var indigo=document.getElementById('indigo');  
     indigo.innerHTML=text;}
 </script>  
-</main>
+</div>
 
-<footer><% include footer %></footer>
+<footer id="footer"><% include includes/footer %></footer>
+</div>
 </body>
 </html>

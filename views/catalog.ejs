@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<%- include head %>
+<%- include includes/head %>
 </head>
-<body class="wrapper">
+<body>
+<div id="pagewrap">
 
-<header>
-<%- include header %>
+<header id="header">
+<%- include includes/header %>
 </header>
-<div class="main-wr"
+<div id="content">
 
 <%= catalog %> :
 <%= result %>
@@ -25,10 +26,13 @@ Or <a href="/variant-3">variant-3</a>
 </div>
 
 
+<aside id="sidebar">
+<% include includes/aside %>
+</aside>
 
-
-<footer>
-<%- include footer %>
+<footer id="footer">
+<%- include includes/footer %>
 </footer>
+</div>
 </body>
 </html>

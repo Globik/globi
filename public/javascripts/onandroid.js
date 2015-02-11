@@ -21,7 +21,7 @@ clearTimeout(id);
 }());
 
 var show=document.getElementById('show33');
-var cnv = document.getElementById('canv');
+var cnv = document.getElementById('cnv');
 var c = cnv.getContext('2d');
 c.fillStyle='rgb(0,0,0)';
 c.fillRect(0,0,650,200);

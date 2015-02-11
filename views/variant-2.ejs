@@ -1,221 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Blog Editable</title>
-<meta http-equiv="X-UA-Compatible" content="some content">
-<meta content="width=device-width,initial-scale=1" name="viewport" />
-<meta charset="utf-8" />
-<meta name="description" content="Simple site on express.js.Blog Ediable. Variant-2.">
-<meta name="author" content="globibot on heroku.com">
-<link rel="shortcut icon" type="image/ico" href="http://frontender.info/favicon.ico">
-<style>
-html{
-height:99%;
-}
-body
-{
-	margin: 0;
-	padding: 0;
-	font: 85% arial, hevetica, sans-serif;
-	text-align: center;
-	color: #333;
-	background: #ddd url() repeat 0 0;
-height:99%;
-}
 
-a:link { color: #B52C07; }
-a:visited { color: #b93411; }
-a:focus { color: #000; }
-a:hover { color: #7d8206; }
-a:active { color: red; }
-h1, h2, h3, h4, h5, h6 { margin: 0 0 .5em; }
-
-h2
-{
-	color: #B52C07;
-	font: 140% georgia, times, "times new roman", serif;
-}
-
-h2 a { text-decoration: none; }
-
-h3
-{
-	color: #7d8206;
-	font: 110% georgia, times, "times new roman", serif;
-}
-
-/* ------------------------------
-container styles
------------------------------- */
-
-#container
-{
-	margin: 1em auto;
-	width: 90%;/*650px*/
-min-height:92%;
-/*max-height:120px;*/
-	text-align: left;
-	background: #fff;
-	border: 12px solid #676767;
-
-
-}
-
-/* ------------------------------
-header styles
------------------------------- */
-
-#header
-{
-	height: 45px;
-	width: 100%;
-	position: relative;
-	background: url(/images/pic.png) no-repeat 0 0;
-	border-bottom: 1px solid #fff;
-}
-
-#header h1
-{
-	position: absolute;
-	left: -500em;
-}
-
-#skipmenu
-{
-	position: absolute;
-	left: 0;
-	top: 5px;
-	width: 50%;
-	text-align: right;
-}
-
-#skipmenu a
-{
-	color: #555;
-	text-decoration: none;
-}
-
-/* ------------------------------
-mainnav styles
------------------------------- */
-
-#mainnav
-{
-	background: #9FA41D;
-	color: #272900;
-	padding: 2px 0;
-	margin-bottom: 22px;
-}
-
-#mainnav ul
-{
-	margin: 0 0 0 20px;
-	padding: 0;
-	list-style-type: none;
-	border-left: 1px solid #C4C769;
-}
-
-#mainnav li
-{
-	display: inline;
-	padding: 0 10px;
-	border-right: 1px solid #C4C769;
-}
-
-#mainnav li a
-{
-	text-decoration: none;
-	color: #272900;
-}
-
-#mainnav li a:hover
-{
-	text-decoration: none;
-	color: #fff;
-	background-color: #272900;
-}
-
-/* ------------------------------
-menu styles
------------------------------- */
-
-#menu
-{       height:37em;
-	float: right;
-	width: 165px;
-	border-left: 1px solid #C5C877;
-	padding-left: 15px;
-}
-
-#menu ul
-{
-	margin: 1em 0;
-	padding: 0;
-}
-
-#menu ul li
-{
-	margin: 0 0 1em;
-	padding: 0;
-	list-style-type: none;
-}
-
-/* ------------------------------
-contents styles
------------------------------- */
-
-#contents
-{ 
-	float: left;
-	width: 80%;/*430px*/
-	margin: 0 0 0 20px;
-/*height:100%;*/
-/*min-height:auto;*/
-box-sizing:border-box;
-}
-
-#contents p { line-height: 165%; }
-.blogentry { border-bottom: 12px solid #C5C877;
-border-right:2px solid red;padding-right:2px; }
-
-.blogentry ul
-{
-	text-align: right;
-	margin: 1em 0;
-	padding: 0;
-	font-size: 95%;
-}
-
-.blogentry li
-{
-	list-style-type: none;
-	display: inline;
-	margin: 0;
-	padding: 2px 2px 2px 7px;
-}
-
-.imagefloat
-{
-	float: right;
-	padding: 2px;
-	border: 1px solid #9FA41D;
-	margin: 0 0 10px 10px;
-}
-
-/* ------------------------------
-footer styles
------------------------------- */
-
-#footer
-{
-	clear: both;
-	color: #272900;
-	text-align: right;
-	font-size: 90%;
-	background: #9FA41D;
-	padding: 5px;
-}
-</style>
+<% include includes/head %>
 <style>
 .main {
     position:relative;padding:40px;display:block;
@@ -380,82 +167,57 @@ background:rgba(255,0,0,0.4);
 }
 </style>
 
-       
+</head>      
 
 <body>
+<div id="pagewrap">
+<header id="header">
+<% include includes/header %>		
+</header>
+<div id="content">
+<article class="post clearfix">
+<header>
+<h1 class="post-title">
+Post title
+</h1>
 
-<div id="container">
-	<div id="header" title="sitename">
-		<div id="skipmenu"><a href="#content">Skip to content</a></div>
-		<h1>
-			Sitename
-		</h1>
-	</div>
-	<div id="mainnav">
-		<ul>
-			<li><a href="/">home</a></li>
-			<li><a href="/catalog">catalog</a></li>
-			<li><a href="/variant-3">variant-3</a></li>
-			<li><a href="#">Section 4</a></li>
-		</ul>
-	</div>
-	<div id="menu">
-		<h3>
-			Archives
-		</h3>
-		<ul>
-			<li><a href="#">December 2003</a></li>
-			<li><a href="#">November 2003</a></li>
-			<li><a href="#">October 2003</a></li>
-			<li><a href="#">September 2003</a></li>
-			<li><a href="#">August 2003</a></li>
-		</ul>
-		<h3>
-			Last 10 Entries
-		</h3>
-		<ul>
-			<li><a href="#">Entry 120 (4)</a></li>
-			<li><a href="#">Entry 119 (0)</a></li>
-			<li><a href="#">Entry 118 (9)</a></li>
-			<li><a href="#">Entry 117 (3)</a></li>
-		</ul>
- 	</div>
-	<div id="contents">
-		<div id="divContent" class="blogentry">
-			<h2>
-				<a href="#" title="Permanent link to this item">Heading here</a>
-			</h2>
-			<h3>
-				Wednesday, 3 December 2015
-			</h3>
+<p class="post-meta">
+<time class="post-date" datetime="2011-05-08" pubdate>Wednesday, 3 Oktober 2015</time> <em>in</em> <a href="#">Category</a></p>
+</header>
+<figure class="post-image">
 <img class="imagefloat" src="/images/pic.png">
+</figure>
+<div id="divContent" contenteditable>
 <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent</p>
 <p>
 
 For IE8 we can use the proprietary onpropertychange event, which also fires whenever the value property changes. This event is also available on versions less than 8, but a few small CSS tweaks will probably be needed to make the expanding text area work overall; I leave making it work in IE6 or IE7 as an exercise to the readers unlucky enough to have to support those ancient browsers.
 
-Now, some of you may have spotted that, as we’re no longer polling, the textarea won’t resize if it has a fluid width and the window is resized. That brings us to our next improvement: we’re going to make the browser resize the textarea automatically. But, I hear you cry, I thought you said this was impossible? Well, not quite. You can’t do it automatically with just HTML and CSS, but all the JS needs to do is update the mirror element with the value of the textarea. It doesn’t have to measure or explicitly set height. The trick is to position the textarea on top of the mirror element, both inside a relatively-positioned containing div. The textarea is positioned absolutely and given a width and height of 100% to make it fill the div. The mirror is positioned statically so it will expand to fit its contents. The containing div will then expand to fit the height of 
+Now, some of you may have spotted that, as we're no longer polling, the textarea won't resize if it has a fluid width and the window is resized. That brings us to our next improvement: we're going to make the browser resize the textarea automatically. But, I hear you cry, I thought you said this was impossible? Well, not quite. You can't do it automatically with just HTML and CSS, but all the JS needs to do is update the mirror element with the value of the textarea. It doesn't have to measure or explicitly set height. The trick is to position the textarea on top of the mirror element, both inside a relatively-positioned containing div. The textarea is positioned absolutely and given a width and height of 100% to make it fill the div. The mirror is positioned statically so it will expand to fit its contents. The containing div will then expand to fit the height of 
 <p>
 Example....
 </p>
+<div class="video">1.5em</div>
+</div><!-- #divContent -->
+</article>			
+<ul>
+<li><a href="#join_form" id="join_pop">Edit</a></li>
+<li><a href="#">Comments (4)</a></li>
+<li><a href="#">Pingbacks (1)</a></li>
+<li>Category: <a href="#" title="Category">CSS</a></li>
+<li>Status: </li>
+</ul>
 
-			
-	<ul><li><a href="#join_form" id="join_pop">Edit</a></li>
-				<li><a href="#">Comments (4)</a></li>
-				<li><a href="#">Pingbacks (1)</a></li>
-				<li>Category: <a href="#" title="Category">CSS</a></li>
-			</ul>
-<div style="background-color:red;clear:both;font-size:1.5em;">1.5em 
 
-</div>
-
-		</div>
+		
 	</div>
-
+<aside id="sidebar">
+<% include includes/aside %>
+</aside>
 	
-<div id="footer">
-		Copyright © Globibot 2015
-	</div>
+<footer id="footer">
+<% include includes/footer %>
+</footer>
 </div>
 
 <a href="#x" class="overlay" id="join_form"></a>
@@ -463,19 +225,20 @@ Example....
 <div class="popup">
   <span id="fuckout" style="background-color:red;"></span>
   <span id="po" class="loading"></span>
+<span id="tus">ddd</span>
      <h2>Text editor</h2>
 </br><button onclick="saveArticle(this)">saveArticle</button></br>
 <textarea id="articleContent" oninput="saveArticle(this)" rows="5" cols="54"  wrap="pysical" value="For edit"></textarea>
 </br>
 <button onclick="saveArticle(this)">saveArticle</button>   
-<h2>Sign Up</h2>
+<h2>Bla bla</h2>
             
 <p>Please enter your details here</p>
             
 </div>
 <script>
 var join_pop=document.getElementById('join_pop');
-
+//var area=document.querySelector('textarea');//
 var articleContent=document.getElementById('articleContent');
 //var divHeader=document.getElementById('divHeader');
 //var divDescription=document.getElementById('divDescription');
@@ -483,14 +246,15 @@ var divContent=document.getElementById('divContent');
 //var out=document.getElementById('out');
 //var po=document.getElementById('po');
 //var checkvis=document.getElementById('checkvis');
-
+var tus=document.getElementById('tus');
+status.innerHTML="l";
 join_pop.onclick=callRedactor;
 
 function callRedactor(){
 //alert('ok');
 divContent.setAttribute('contenteditable',true);
 articleContent.value=divContent.innerHTML;
-//divContent.inner
+
 }
 
 
@@ -504,6 +268,8 @@ if(errCount === 0){
  //out.textContent=articleContent.value;
  divContent.innerHTML=articleContent.value;
  divContent.setAttribute('contenteditable',false);
+tus.textContent="Article's contenteditable after editing will be false";
+//alert('ok');
 //alert('out.textContent :'+out.textContent);
 //var numb=divContent.getAttribute('data-id');
 //alert('data-id : '+numb);
@@ -535,7 +301,7 @@ insertMetachars('<br>','');
 
 function insertMetachars(sStartTag, sEndTag) {
 var bDouble = arguments.length > 1, 
-oMsgInput = area;
+oMsgInput = articleContent;
 
 
 var nSelStart = oMsgInput.selectionStart, 
