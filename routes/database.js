@@ -75,15 +75,15 @@ router.get('/alfa/:name',function(req,res){
 console.log('req.params.name :'+req.params.name);
 console.log('req.body.name :'+req.body.name);
 console.log('req.body :'+ req.body);
-console.log('req.name :'+ req.name);
-console.log('req.etwas :'+req.etwas);
+//console.log('req.name :'+ req.name);
+//console.log('req.etwas :'+req.etwas);
 /***
 fs.readFile('./views/'+req.params.name,'utf-8',function(err,data){
 //console.log(data);
 res.send(data);
 });
 ***/
-var stream=fs.createReadStream('./views/'+req.params.name);
+var stream=fs.createReadStream('./views/includes/'+req.params.name);
 console.log(stream);
 stream.on('data',function(chunk){
 console.log('chunk '+chunk.length);});
@@ -99,7 +99,7 @@ fs.writeFile('./views/'+req.body.qwest,req.body.savingfile,function(err){
 if(err) throw err;
 console.log('File write completed');});
 ***/
-var ws=fs.createWriteStream('./views/'+req.body.qwest);
+var ws=fs.createWriteStream('./views/includes/'+req.body.qwest);
     ws.write(req.body.savingfile);
 console.log(ws);
 /***
@@ -110,12 +110,12 @@ res.send('file saved');
 
 router.get('/fileslist',function(req,res){
 
-fs.readdir('./views/',function(err,files){
+fs.readdir('./views/includes',function(err,files){
 if(err) throw err;
 var d=[];
 files.forEach(function(file){
 d.push(file);
-console.log('./views/'+file);});
+console.log('./views/includes '+file);});
 console.log('d.length '+d.length);
 console.log('d '+d);
 res.json(d);});

@@ -5,7 +5,7 @@ var passport=require('passport');
 var cookieParser=require('cookie-parser');
 var bodyparser=require('body-parser');
 var met=require('method-override');
-//var bcrypt=require('bcrypt');
+//var bcrypt=require('../build/Release/bson');
 var session=require('express-session');
 var SkinStore=require('connect-mongoskin');
 

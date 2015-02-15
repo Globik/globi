@@ -180,7 +180,7 @@ HEADER
 CONTENT
 *************************************************************************************/
 #content {
-	background: #fff;
+	background: rgba(255,255,230,0.7);
 	margin: 30px 0 30px;
 	padding: 20px 35px;
 	width: 600px;

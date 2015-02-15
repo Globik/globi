@@ -1,0 +1,98 @@
+<!-- admin/files.ejs -->
+<a href="#x" class="overlay" id="login_form"></a>
+        
+<div class="popup">
+<span id="indigo" class="loading"></span>
+<table id="table-files">
+<caption><h3>Files in views</h3></caption>
+<thead>
+<tr>
+<th>Files</th><th>status</th><th>Save</th><th>no-del</th>
+</tr>
+</thead>
+<tbody id="tbody-files">
+
+</tbody>
+</table> 
+</br></br>
+<button onclick="saveFil(this)">save File</button>
+</br>
+<textarea id="textarea-filedit" style="width:400px;height:400px;" placeholder="File edit."></textarea>
+
+
+<h2>Welcome Guest!</h2>
+<p>Please enter your login and password here</p>
+
+<div>
+<label for="login">Login</label>
+<input type="text" id="login" value="">
+</div>
+            
+<div>
+<label for="password">Password</label>
+<input type="password" id="password" value="">
+</div>
+<input type="button" value="Log In">
+<a class="close" href="#"></a>
+</div>
+  <script>
+var tbodyFiles=document.getElementById('tbody-files');
+var textareaFiledit=document.getElementById('textarea-filedit');
+
+login_pop.onclick=showFiles;
+
+tbodyFiles.innerHTML='';
+showIndigo("");
+
+function showFiles(event){
+showIndigo('Loading..');
+//alert('ok');
+
+vax('get','/fileslist',null,onLoad,onError);
+function onLoad(e){
+showIndigo('');
+var data=JSON.parse(this.responseText);
+for(var i=0;i< data.length;i++){
+if(!tbodyFiles.childNodes[i]){
+tbodyFiles.innerHTML+='<tr><th><button data-filename="'+data[i]+'"  onclick="callFil(this);">'+data[i]+'</button></th><th>status</th><th>sav</th></tr>';}
+
+}
+}
+}
+
+function callFil(event){
+alert(event.getAttribute('data-filename'));
+showIndigo('Loading...');
+var bube=event.getAttribute('data-filename');
+textareaFiledit.setAttribute('data-fuk',bube);
+//alert(filedit.getAttribute('data-fuk'));
+
+vax('get','/alfa/'+bube,null,onLoad,onError);
+
+function onLoad(e){
+showIndigo('');
+textareaFiledit.value=this.responseText;}
+}
+
+function saveFil(event){
+var errCount=0;
+if(textareaFiledit.value === ''){errCount++}
+if(errCount === 0){
+showIndigo("Saving file...");
+var bodyfile=textareaFiledit.value;
+var data={};
+  data.savingfile=bodyfile;
+  data.qwest=textareaFiledit.getAttribute('data-fuk');
+  var data=JSON.stringify(data);
+
+  vax('post','/savefile',data,onLoad,onError);
+function onLoad(e){showIndigo(this.response);}
+
+}
+else{alert('Please fill in field');}
+}
+
+function showIndigo(text){
+indigo.innerHTML=text;
+}
+</script> 
