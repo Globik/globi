@@ -126,7 +126,7 @@ router.get('/login',(req,res)=>{
 	res.send(login.login({message}));
 });
 
-var articles_page=require('./views/articles_page');
+//var articles_page=require('./views/articles_page');
 /*
 router.get('/articles',pagination,(req,res)=>{
 	console.log('locals.total :',res.locals);
@@ -158,6 +158,7 @@ router.get('/profile',ensureAuthenticated,(req,res)=>{
 })
 router.get('/alfa',(req,res)=>{res.send("OK")});
 */
+/*
 router.post('/login',passport.authenticate('login', {failureRedirect: '/login',failureFlash:true}),
 (req, res)=> {res.redirect('/');});
 router.get('/logout',(req,res)=>{req.logout();res.redirect('/')});
@@ -165,6 +166,7 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 }
+*/
 //router.get('/',(req,res)=>{res.send("Hallo world");})
 app.use('/',router);
 if(develop==app.get('env')){app.use(errorHandler());}
