@@ -127,6 +127,7 @@ router.get('/login',(req,res)=>{
 });
 
 var articles_page=require('./views/articles_page');
+/*
 router.get('/articles',pagination,(req,res)=>{
 	console.log('locals.total :',res.locals);
 	let db=req.db;
@@ -136,9 +137,8 @@ router.get('/articles',pagination,(req,res)=>{
 	if(!er)res.send(articles_page.articles_page({buser:req.user,posts:d,locals}));
 	});
 	});
-router.get('/labs',(req,res)=>{
-	res.send("labs")
-}); 
+	*/
+router.get('/labs',(req,res)=>{res.send("labs")}); 
 //node index
 /*
 var articles_page_page=require('./views/articles_page_page');
