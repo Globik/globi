@@ -26,9 +26,8 @@ var url=process.env.MONGOHQ_URL
 var MongoClient=require('mongodb').MongoClient;
 var ObjectID=require('mongodb').ObjectID;
 MongoClient.connect(url,(er,dob)=>{
-	if(er){console.log('DB Error :',er);
-	suka+=er;}
-	else{console.log('db connected');db.b=dob;suka+=db.b +' : db '+ db;}
+	if(er){console.log('DB Error :',er);}
+	else{console.log('db connected');db.b=dob;}
 require('./config/passport')(db.b,passport);
 });
 
@@ -64,7 +63,6 @@ redstr.on('data',(d)=>{
 req.advdata=JSON.parse(d.toString());
 */
 req.db=db.b;
-suka+=req.db;
 next();
 });
 
@@ -131,7 +129,7 @@ router.get('/login',(req,res)=>{
 	res.send(login.login({message}));
 });
 
-/*var articles_page=require('./views/articles_page');
+var articles_page=require('./views/articles_page');
 
 router.get('/articles',pagination,(req,res)=>{
 	console.log('locals.total :',res.locals);
@@ -142,7 +140,7 @@ router.get('/articles',pagination,(req,res)=>{
 	if(!er)res.send(articles_page.articles_page({buser:req.user,posts:d,locals}));
 	});
 	});
-*/
+
 router.get('/labs',(req,res)=>{res.send("labs")}); 
 //node index
 
@@ -157,13 +155,13 @@ router.get('/articles/:page',pagination,(req,res)=>{
 	res.send(articles_page_page.articles_page_page({locals}))}else{res.sendStatus(403)}
 })
 
-/*
+
 router.get('/profile',ensureAuthenticated,(req,res)=>{
 	res.send(`<b>Hallo Admin!</b>`);
 })
 router.get('/alfa',(req,res)=>{res.send("OK")});
-*/
-/*
+
+
 router.post('/login',passport.authenticate('login', {failureRedirect: '/login',failureFlash:true}),
 (req, res)=> {res.redirect('/');});
 router.get('/logout',(req,res)=>{req.logout();res.redirect('/')});
@@ -171,11 +169,11 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 }
-*/
+
 //router.get('/',(req,res)=>{res.send("Hallo world");})
 app.use('/',router);
 if(develop==app.get('env')){app.use(errorHandler());}
-//node --harmony app
+//node --harmony index
 function flipdas(){flipbit=flipbit ^ 1;}
 var server=http.createServer(app);
 server.listen(app.get('port'),()=>{
