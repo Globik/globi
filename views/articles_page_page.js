@@ -19,6 +19,6 @@ ${articles_block.articles_block(n)}
 <div id="pagination">
 ${paginator.paginator(n)}
 </div>
-</main><footer id="footer3">  jij</footer></body></html>`;
+</main><footer id="footer3">footer</footer></body></html>`;
 module.exports={articles_page_page};
  function getCssLink(){return `<link href="/css/articles-paginator.css" rel="stylesheet">`;} 

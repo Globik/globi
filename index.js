@@ -20,9 +20,9 @@ var fs=require('fs');
 //var reload=require('reloadjs');
 var db={};
 //var url="mongodb://127.0.0.1:27017/todo";
-var url=process.env.MONGOHQ_URL
-//var url=process.env.MONGOHQ_URL_TEST;
-
+//var url=process.env.MONGOHQ_URL
+var url=process.env.MONGOHQ_URL_TEST;
+//console.log(url);
 var MongoClient=require('mongodb').MongoClient;
 var ObjectID=require('mongodb').ObjectID;
 MongoClient.connect(url,(er,dob)=>{
