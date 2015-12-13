@@ -131,7 +131,7 @@ router.get('/login',(req,res)=>{
 	res.send(login.login({message}));
 });
 
-var articles_page=require('./views/articles_page');
+/*var articles_page=require('./views/articles_page');
 
 router.get('/articles',pagination,(req,res)=>{
 	console.log('locals.total :',res.locals);
@@ -142,10 +142,10 @@ router.get('/articles',pagination,(req,res)=>{
 	if(!er)res.send(articles_page.articles_page({buser:req.user,posts:d,locals}));
 	});
 	});
-
+*/
 router.get('/labs',(req,res)=>{res.send("labs")}); 
 //node index
-/*
+
 var articles_page_page=require('./views/articles_page_page');
  router.param('page',(req,res,next,page)=>{
 	if(isNumb(page)==false){res.sendStatus(404);}else if(page==0){res.sendStatus(404)}else{next();}
@@ -156,7 +156,7 @@ router.get('/articles/:page',pagination,(req,res)=>{
 	if(locals.page <= locals.total_pages){
 	res.send(articles_page_page.articles_page_page({locals}))}else{res.sendStatus(403)}
 })
-*/
+
 /*
 router.get('/profile',ensureAuthenticated,(req,res)=>{
 	res.send(`<b>Hallo Admin!</b>`);
