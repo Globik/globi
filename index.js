@@ -64,7 +64,7 @@ req.db=db.b;
 next();
 })});
 
-/*
+
 const limit=10;
 function pagination(req,res,next){
 	var qu=parseInt(req.params.page) || 1;
@@ -94,7 +94,7 @@ if(num>limit) {res.locals.prev=true;}
 next();
 	});
 }
-*/
+
 //node --harmony --harmony_destructuring --harmony_rest_parameters --harmony_modules index
 //node --harmony index
 /*
@@ -125,7 +125,7 @@ router.get('/login',(req,res)=>{
 	var message=req.flash('message');
 	res.send(login.login({message}));
 });
-/*
+
 var articles_page=require('./views/articles_page');
 router.get('/articles',pagination,(req,res)=>{
 	console.log('locals.total :',res.locals);
@@ -138,9 +138,9 @@ router.get('/articles',pagination,(req,res)=>{
 	});
 router.get('/labs',(req,res)=>{
 	res.send("labs")
-}); */
+}); 
 //node index
-/*
+
 var articles_page_page=require('./views/articles_page_page');
  router.param('page',(req,res,next,page)=>{
 	if(isNumb(page)==false){res.sendStatus(404);}else if(page==0){res.sendStatus(404)}else{next();}
@@ -161,7 +161,7 @@ router.get('/logout',(req,res)=>{req.logout();res.redirect('/')});
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
-}*/
+}
 //router.get('/',(req,res)=>{res.send("Hallo world");})
 app.use('/',router);
 if(develop==app.get('env')){app.use(errorHandler());}
