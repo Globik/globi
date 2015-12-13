@@ -55,11 +55,10 @@ app.use(passport.session());
 app.use(express.static(path.join(__dirname,'public')));
 
 app.use((req,res,next)=>{
-let redstr=fs.createReadStream('./advert-config.json');
-redstr.on('error',(er)=>{console.log('err readstr :',er)});
-redstr.on('data',(d)=>{
-
-req.advdata=JSON.parse(d.toString());
+//let redstr=fs.createReadStream('./advert-config.json');
+//redstr.on('error',(er)=>{console.log('err readstr :',er)});
+//redstr.on('data',(d)=>{
+//req.advdata=JSON.parse(d.toString());
 req.db=db.b;
 next();
 })});
@@ -112,14 +111,14 @@ var temp=path.join(viewsDir,pat);reload(temp);}flipdas();}});
 */
 var router=express.Router();
 var haupt_page=require('./views/haupt_page.js');
-var login=require('./views/login');
+var login=require('./views/login.js');
 //supervisor --harmony --harmony_destructuring -w views index 
 //supervisor --harmony --harmony_destructuring views index
 //supervisor --force-watch views index
 
 router.get('/',(req,res)=>{
-	var adv=req.advdata;
-	var bib=haupt_page.haupt_page({showmodule:adv.advertmodule,buser:req.user});
+	//var adv=req.advdata;
+	var bib=haupt_page.haupt_page({showmodule:true,buser:req.user});
 	res.send(bib);});
 
 router.get('/login',(req,res)=>{
