@@ -21,7 +21,7 @@ var db={};
 //var url="mongodb://127.0.0.1:27017/todo";
 var url=process.env.MONGOHQ_URL
 //var url=process.env.MONGOHQ_URL_TEST;
-/*
+
 var MongoClient=require('mongodb').MongoClient;
 var ObjectID=require('mongodb').ObjectID;
 MongoClient.connect(url,(er,dob)=>{
@@ -29,7 +29,7 @@ MongoClient.connect(url,(er,dob)=>{
 	else{console.log('db connected');db.b=dob;}
 require('./config/passport')(db.b,passport);
 });
-*/
+
 //var crypto=require('crypto');
 
 var app=express();
@@ -42,17 +42,17 @@ app.use(favicon(__dirname+'/public/w4.png'));
 //var user={_id:1,username:"Bob",password:"secret"};
 
 if(develop==app.get('env')){app.use(logger('dev'));}
-//app.use(methodOverride());
+app.use(methodOverride());
 //app.use(cookieParser('secret','mysecret'));
 app.use(session({/*cookie:{httpOnly:true,secure:false,maxAge:60*60*4000},*/
 resave:false,saveUninitialized:true,secret:'bred'/*,store:new MongoStore({url})*/}));
-//app.use(flash());
-//app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({extended:true}));
-//app.use(multer({dest:'./uploads'}).single('singleInputFileName'));
-//app.use(passport.initialize());
-//app.use(passport.session());
-//app.use(express.static(path.join(__dirname,'public')));
+app.use(flash());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(multer({dest:'./uploads'}).single('singleInputFileName'));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(express.static(path.join(__dirname,'public')));
 /*
 app.use((req,res,next)=>{
 let redstr=fs.createReadStream('./advert-config.json');
