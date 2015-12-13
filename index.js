@@ -41,7 +41,7 @@ app.use(favicon(__dirname+'/public/w4.png'));
 
 //var user={_id:1,username:"Bob",password:"secret"};
 
-if(develop==app.get('env')){app.use(logger('dev'));}
+//if(develop==app.get('env')){app.use(logger('dev'));}
 app.use(methodOverride());
 //app.use(cookieParser('secret','mysecret'));
 app.use(session({/*cookie:{httpOnly:true,secure:false,maxAge:60*60*4000},*/
@@ -49,7 +49,7 @@ resave:false,saveUninitialized:true,secret:'bred'/*,store:new MongoStore({url})*
 app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(multer({dest:'./uploads'}).single('singleInputFileName'));
+//app.use(multer({dest:'./uploads'}).single('singleInputFileName'));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname,'public')));
@@ -65,7 +65,8 @@ next();
 })});
 
 
-const limit=10;
+var limit=10;
+/*
 function pagination(req,res,next){
 	var qu=parseInt(req.params.page) || 1;
 	var page=qu;
@@ -94,7 +95,7 @@ if(num>limit) {res.locals.prev=true;}
 next();
 	});
 }
-
+*/
 //node --harmony --harmony_destructuring --harmony_rest_parameters --harmony_modules index
 //node --harmony index
 /*
