@@ -1,5 +1,6 @@
 'use strict';
 //node index
+var suka='';
 var develop="development";
 var http=require('http');
 var express=require('express');
@@ -25,8 +26,9 @@ var url=process.env.MONGOHQ_URL
 var MongoClient=require('mongodb').MongoClient;
 var ObjectID=require('mongodb').ObjectID;
 MongoClient.connect(url,(er,dob)=>{
-	if(er){console.log('DB Error :',er)}
-	else{console.log('db connected');db.b=dob;}
+	if(er){console.log('DB Error :',er);
+	suka+=er;}
+	else{console.log('db connected');db.b=dob;suka+=db.b +' : db '+ db;}
 require('./config/passport')(db.b,passport);
 });
 
@@ -118,7 +120,7 @@ var haupt_page=require('./views/haupt_page.js');
 
 router.get('/',(req,res)=>{
 	//var adv=req.advdata;
-	var bib=haupt_page.haupt_page({showmodule:true,buser:req.user});
+	var bib=haupt_page.haupt_page({showmodule:true,message:suka,buser:req.user});
 	res.send(bib);});
 /*
 router.get('/login',(req,res)=>{

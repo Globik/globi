@@ -12,6 +12,7 @@ ${(warnig ? `<div id="warnig">Warnig</div>`:``)}<nav class="back">${header_menu.
 	${(haupt_ban ? `<div id="haupt-banner"><div id="real-ban">Banner</div></div>` : ``)}
 ${(n.buser ? `${admin_main_menu.admin_main_menu({})}`:``)}
 <main id="pagewrap"><br>
+Message : ${(n.message ? n.message : "No message")}<br><hr>
 	${(n.buser ? n.buser.username : "Guest")}
 	${(n.buser ? `<a href="/logout">logout</a>` :`<a href="/login">login</a>`)}
 <div>Some div with user's personals. ${douser(n)}</div>
