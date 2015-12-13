@@ -55,16 +55,17 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname,'public')));
-/*
+
 app.use((req,res,next)=>{
 //let redstr=fs.createReadStream('./advert-config.json');
 //redstr.on('error',(er)=>{console.log('err readstr :',er)});
 //redstr.on('data',(d)=>{
 //req.advdata=JSON.parse(d.toString());
 req.db=db.b;
+suka+=req.db;
 next();
-})});
-*/
+});
+
 
 var limit=10;
 /*
