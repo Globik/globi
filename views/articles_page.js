@@ -6,7 +6,7 @@ admin_main_menu=require('./admin_main_menu.js'),
 articles_block=require('./articles_block.js'),
 paginator=require('./paginator.js'),
 footer=require('./footer.js');
-//var {footer}=require('./includes');
+
 var articles_page=(n)=>`<!DOCTYPE html><html lang="en">
 <head>${head.head({title:"Articles Page",csslink:`${getCssLink()}`})}</head>
 <body><nav class="back">${header_menu.header_menu({buser:n.buser})}</nav>

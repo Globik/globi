@@ -140,21 +140,24 @@ router.get('/labs',(req,res)=>{
 	res.send("labs")
 }); 
 //node index
-
+/*
 var articles_page_page=require('./views/articles_page_page');
  router.param('page',(req,res,next,page)=>{
 	if(isNumb(page)==false){res.sendStatus(404);}else if(page==0){res.sendStatus(404)}else{next();}
 })
-function isNumb(str){var numstr=/^\d+$/;return numstr.test(str);}
+
 router.get('/articles/:page',pagination,(req,res)=>{
 	var locals=res.locals;
 	if(locals.page <= locals.total_pages){
 	res.send(articles_page_page.articles_page_page({locals}))}else{res.sendStatus(403)}
 })
+*/
+/*
 router.get('/profile',ensureAuthenticated,(req,res)=>{
 	res.send(`<b>Hallo Admin!</b>`);
 })
 router.get('/alfa',(req,res)=>{res.send("OK")});
+*/
 router.post('/login',passport.authenticate('login', {failureRedirect: '/login',failureFlash:true}),
 (req, res)=> {res.redirect('/');});
 router.get('/logout',(req,res)=>{req.logout();res.redirect('/')});
@@ -170,3 +173,4 @@ function flipdas(){flipbit=flipbit ^ 1;}
 var server=http.createServer(app);
 server.listen(app.get('port'),()=>{
 console.log('Express server listening on port'+app.get('port'));});
+function isNumb(str){var numstr=/^\d+$/;return numstr.test(str);}
