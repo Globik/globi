@@ -8,7 +8,7 @@ var header_menu=(n)=>
 </ul>
 
 <label id="lb-menu-all" class="lb-menu-all" 
-onclick="dowas1()" ontouchstart="dowas1()">
+onclick="dowas1()">
  <div class="spinner diagonal part-1"></div>
  <div class="spinner horizontal"></div>
  <div class="spinner diagonal part-2"></div>
@@ -47,7 +47,7 @@ gr=true;}
 document.body.onload=shalter;
 	function shalter(){
 document.querySelector('#pagewrap').onclick=clickshalter;
-document.querySelector('#pagewrap').ontouchstart=clickshalter;
+/*document.querySelector('#pagewrap').ontouchstart=clickshalter;*/
 function clickshalter(){
 	minmen.className="";
 	minmen.style.display="none";

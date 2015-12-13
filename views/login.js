@@ -112,7 +112,7 @@ button:hover{
 }  
 form p{margin-top:20px;padding:1px;color:#0e6252;}
 form p a{color:#0e6252;}
-#red-warnig{position:absolute;top:100px;left:100px;padding:10px;background:rgba(255,0,0,0.5);opacity:1;}
+#red-warnig{position: absolute;top:100px;left:100px;padding:10px;background:rgba(255,0,0,0.5);opacity:0.9;}
 </style>
 ${(n.message.length > 0 ? `<span id="red-warnig">${n.message}</span>` : ``)}
 <div class="form-box">
