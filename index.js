@@ -53,7 +53,7 @@ app.use(multer({dest:'./uploads'}).single('singleInputFileName'));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname,'public')));
-/*
+
 app.use((req,res,next)=>{
 let redstr=fs.createReadStream('./advert-config.json');
 redstr.on('error',(er)=>{console.log('err readstr :',er)});
@@ -63,7 +63,7 @@ req.advdata=JSON.parse(d.toString());
 req.db=db.b;
 next();
 })});
-*/
+
 /*
 const limit=10;
 function pagination(req,res,next){
@@ -115,12 +115,12 @@ var router=express.Router();
 //supervisor --harmony --harmony_destructuring -w views index 
 //supervisor --harmony --harmony_destructuring views index
 //supervisor --force-watch views index
-/*
+
 router.get('/',(req,res)=>{
 	var adv=req.advdata;
 	var bib=haupt_page.haupt_page({showmodule:adv.advertmodule,buser:req.user});
 	res.send(bib);});
-	
+/*	
 router.get('/login',(req,res)=>{
 	var message=req.flash('message');
 	res.send(login.login({message}));
@@ -161,9 +161,7 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
   res.redirect('/login');
 }*/
-router.get('/',(req,res)=>{
-	res.send("Hallo world");
-})
+//router.get('/',(req,res)=>{res.send("Hallo world");})
 app.use('/',router);
 if(develop==app.get('env')){app.use(errorHandler());}
 //node --harmony app
