@@ -110,8 +110,8 @@ if(event=='change'){if(!flipbit){console.log("DOING this Path :",pat);}else{
 var temp=path.join(viewsDir,pat);reload(temp);}flipdas();}});
 */
 var router=express.Router();
-//var haupt_page=require('./views/haupt_page.js');
-//var login=require('./views/login');
+var haupt_page=require('./views/haupt_page.js');
+var login=require('./views/login');
 //supervisor --harmony --harmony_destructuring -w views index 
 //supervisor --harmony --harmony_destructuring views index
 //supervisor --force-watch views index
@@ -120,11 +120,12 @@ router.get('/',(req,res)=>{
 	var adv=req.advdata;
 	var bib=haupt_page.haupt_page({showmodule:adv.advertmodule,buser:req.user});
 	res.send(bib);});
-/*	
+
 router.get('/login',(req,res)=>{
 	var message=req.flash('message');
 	res.send(login.login({message}));
 });
+/*
 var articles_page=require('./views/articles_page');
 router.get('/articles',pagination,(req,res)=>{
 	console.log('locals.total :',res.locals);
